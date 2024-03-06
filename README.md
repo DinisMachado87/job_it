@@ -1,83 +1,103 @@
-# BakeBakery App - README
+README
+# Job it. 
+ Job Search Management app
 
-![Responsive Mockup](documentation/am_i_responsive.png)
+![Responsive Mockup](path placeholder)
 
-*The link to [Bakery Bake](https://bakery-bake-83c76bb3649a.herokuapp.com/)*
+*The link to [Job it.](https:Link/)*
 
 ## Introduction
 
-The BakeBakery App is a Python terminal-based application designed to help users manage recipes, pantry goals, and shopping lists for a bakery. It allows users to interact with recipes, update pantry goals based on recipes, get shopping lists, register shopped groceries, and more.
 
 ## Features
 
-![Recipe choice screen](documentation/which_recipe.png)
+![img description](image path)
 
-### Recipe Management
-
-View recipes for various baked goods, including croissants, pastel de nata, Portuguese rice flour cakes, and brownies.
-Print detailed ingredient lists for each recipe.
-
-### Pantry Goals
-
-Update pantry goals automatically when updating the intended servings of a recipe. The app automatically adds ingredients from all recipes and a 20% safety increase to each ingredient on pantry goals.
-
-![Updatedoses screen](documentation/update_servings.png)
-
-### Recipe Doses
-
-Update recipe doses by multiplying ingredient amounts based on the number of servings entered by the user.
-
-![Get Shopping List Screen](documentation/shopping_list.png)
-
-### Get Shopping List
-
-Get a shopping list by subtracting pantry amounts from pantry goal amounts.
-
-![Shopped Groceries screen](documentation/introduce_shopping.png)
-
-### Shopped Groceries
-
-Register shopped groceries by entering the amounts of various ingredients.
-
-### Cooked Recipe
-
-Register cooked recipes to subtract expended ingredients from the pantry.
-
-### Clear Terminal
-
-Automatically clears the terminal screen for a cleaner interface, when one is finished with an action.
-
-![Welcome Menu](documentation/opening_message_menu.png)
-
-
-### User-Friendly Menu
-
-The application provides a user-friendly menu with options to perform various actions.
+### Feature items
 
 ## How to Use
 
-Click the link to [Bakery Bake](https://bakery-bake-83c76bb3649a.herokuapp.com/) or past 'https://bakery-bake-83c76bb3649a.herokuapp.com/' in your browser.
-Navigate through the menu using arrow keys and Enter.
-Choose actions such as getting a shopping list, updating recipe doses, registering shopped groceries, or registering cooked recipes.
-Follow on-screen prompts to input necessary information.
+Click the link to [Job ite](link) or paste 'link' in your browser.
 
 ## Technologies
 
-### Languages:
+### First Provisory Strucure Draft
 
-Python 3.8.5: Used to write the whole app
+![img description](image path)
 
+### Current PEntity ERD
+
+![img description](image path)
+
+## User Stories
+
+#### Create Dream Job Preferences Profile:
+
+As a user, I can create a profile with my dream job preferences so that I can set up my job search criteria.
+
+- AC1: I can specify preferences such as relocation, commuting distance, work from home option, salary range, etc.
+
+- AC2: I can save my preferences for future reference.
+
+#### Add Job Profiles:
+
+As a user, I can add job profiles to my profile to track jobs I want to apply to.
+
+- AC1: I can add details such as job title, application deadline, position availability, application link, etc.
+
+- AC2: I can specify criteria for each job profile, matching those of my dream job preferences.
+
+#### Automatically Update Dream Job Preferences:
+
+As a user, I want my dream job preference choices to be automatically updated when I add a new option with a new job profile, so that my preferences stay up-to-date.
+
+- AC1: Whenever I add a new job profile, I am prompted to review and update my dream job preferences if needed.
+
+#### Customize Job Profile Criteria Fields:
+
+As a user, I can customize job profile criteria fields to tailor them to specific job requirements.
+
+- AC1: I can add custom fields such as specific skills, certifications, or preferences related to the job.
+
+#### View Job Ratings and Visualization:
+
+As a user, I can view an overall automatic rating for each job profile and visualize it in a chart.
+
+- AC1: The job rating is calculated based on the matching percentage between the job criteria and my dream job preferences.
+
+- AC2: The job rating is displayed in a chart along with other relevant information about each job.
+
+#### Choose Number of Top Matching Jobs:
+
+As a user, I can choose how many of the top matching jobs I want to see in the chart for better visualization and comparison.
+
+- AC1: I can specify the number of top matching jobs to be displayed in the chart settings.
+
+#### Select Main Criteria for Job Matching Chart:
+
+As a user, I can choose the main criteria of the jobs to be visible in the header of the job matching chart for easier comparison.
+
+- AC1: I can select the criteria such as salary range, commuting distance, work from home option, etc., to be displayed in the chart header.
+
+#### Access Job Management Board:
+
+As a user, I have access to a job management board to help with managing job application status.
+
+- AC1: I can track the status of each job application (e.g., applied, interview scheduled, rejected) on a centralized board.
+
+- AC2: I can update the status of each job application as it progresses through the hiring process.
+
+#### Automatically Calculate Commute Distance:
+
+As a user, I want the commute distance to be automatically calculated for each job profile to make informed decisions.
+
+- AC1: The commuting distance is calculated based on the job location and my preferred mode of transportation.
+
+## Languages:
 
 ### Dependencies
 
-Heroku: used as a terminal to deploy the app.
-Google Sheets API library for accessing and modifying Google Sheets.
-google-auth: Google Authentication library.
-simple-term-menu: Library for creating terminal-based menus.
-
 ### Standard library imports:
-
-[os](https://docs.python.org/3/library/os.html ) was used to clear the terminal before running the program.
 
 ### Other tools:
 
@@ -87,50 +107,17 @@ simple-term-menu: Library for creating terminal-based menus.
 
 ## Resolved bugs
 
-Through testing, we realized we needed to create a validation function to make sure the data introduced by the user is a non-negative numeric value, whether it's an integer or a float. This function, named verify_input, not only checks for the correctness of the input type but also ensures that the input is not an empty string, rejecting negative numbers. The get_valid_input function encapsulates the user input process, prompting the user until a valid input is provided, thus enhancing the robustness and reliability of our data processing.
-
 ## Deployment
 
 ### Clone the repository to your local machine:
 
 git clone https://github.com/your-username/BakeBakery.git
 
-### Install the required dependencies: 
-
-pip install gspread google-auth simple-term-menu
-
-### Set up Google Sheets API:
-
-* Follow the instructions in the gspread documentation to create and download a service account key in JSON format.
-* Place the downloaded JSON key file in the project directory and name it creds.json.
-* Create a Google Sheets document and name it 'BakeryBake'. Share it with the email address provided in the client_email field of the creds.json file.
-
-### Configure Heroku GitHub Integration:
-
-* Navigate to the Deploy tab of your Heroku app in the Heroku Dashboard.
-* Enable GitHub integration by authenticating with GitHub.
-* Ensure that your GitHub repository has admin access, as this is required for configuring automatic GitHub deploys.
-* Link your Heroku app to a GitHub repo in the Deploy tab.
-* Optionally, configure manual or automatic deploys based on your preferences.
-
-### Run the application on Heroku:
-
-* After setting up GitHub integration, you can deploy your app manually by selecting the desired branch and clicking "Deploy Branch."
-* For automatic deploys, any pushes to the specified GitHub branch will trigger Heroku to build and deploy the changes.
-
-### Additional Notes:
-
-* View build output and historical build information in the application’s Activity tab on the Heroku Dashboard.
-* Ensure that the GitHub repository is accessible and the GitHub integration has the necessary permissions for smooth deployment.
-* For troubleshooting or additional information, refer to the Heroku GitHub Integration FAQ.
-
 <br>
 
-![Code Institute Python verification print screen](documentation/verification.png)
+![Verification print screen](img path)
 
 ## Verification
-
-I verified all code in the Code Institute CI Python Linter
 
 ## Contributors
 
@@ -138,14 +125,4 @@ Dinis Machado
 
 ## Credits
 
-- [Google Sheets](https://www.google.com/sheets/about/)
-
-- [Code institute Google Sheets connection with Python walk-through](https://codeinstitute.net/se/)
-
-- [Code institute Heroku deployment walk-through](https://codeinstitute.net/se/)
-
-- Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
-
 ## Acknowledgments
-
-I am enormously thankful to my mentors Juliia Konn and Alex K. for their guidance and valuable feedback!
