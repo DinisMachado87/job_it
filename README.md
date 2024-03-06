@@ -1,110 +1,151 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# BakeBakery App - README
 
-Welcome USER_NAME,
+![Responsive Mockup](documentation/am_i_responsive.png)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+*The link to [Bakery Bake](https://bakery-bake-83c76bb3649a.herokuapp.com/)*
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## Introduction
 
-## Gitpod Reminders
+The BakeBakery App is a Python terminal-based application designed to help users manage recipes, pantry goals, and shopping lists for a bakery. It allows users to interact with recipes, update pantry goals based on recipes, get shopping lists, register shopped groceries, and more.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Features
 
-`python3 -m http.server`
+![Recipe choice screen](documentation/which_recipe.png)
 
-A blue button should appear to click: _Make Public_,
+### Recipe Management
 
-Another blue button should appear to click: _Open Browser_.
+View recipes for various baked goods, including croissants, pastel de nata, Portuguese rice flour cakes, and brownies.
+Print detailed ingredient lists for each recipe.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Pantry Goals
 
-A blue button should appear to click: _Make Public_,
+Update pantry goals automatically when updating the intended servings of a recipe. The app automatically adds ingredients from all recipes and a 20% safety increase to each ingredient on pantry goals.
 
-Another blue button should appear to click: _Open Browser_.
+![Updatedoses screen](documentation/update_servings.png)
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Recipe Doses
 
-To log into the Heroku toolbelt CLI:
+Update recipe doses by multiplying ingredient amounts based on the number of servings entered by the user.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+![Get Shopping List Screen](documentation/shopping_list.png)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Get Shopping List
 
-------
+Get a shopping list by subtracting pantry amounts from pantry goal amounts.
 
-## Release History
+![Shopped Groceries screen](documentation/introduce_shopping.png)
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Shopped Groceries
 
-**September 20 2023:** Update Python version to 3.9.17.
+Register shopped groceries by entering the amounts of various ingredients.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Cooked Recipe
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+Register cooked recipes to subtract expended ingredients from the pantry.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Clear Terminal
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+Automatically clears the terminal screen for a cleaner interface, when one is finished with an action.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+![Welcome Menu](documentation/opening_message_menu.png)
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+### User-Friendly Menu
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+The application provides a user-friendly menu with options to perform various actions.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+## How to Use
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+Click the link to [Bakery Bake](https://bakery-bake-83c76bb3649a.herokuapp.com/) or past 'https://bakery-bake-83c76bb3649a.herokuapp.com/' in your browser.
+Navigate through the menu using arrow keys and Enter.
+Choose actions such as getting a shopping list, updating recipe doses, registering shopped groceries, or registering cooked recipes.
+Follow on-screen prompts to input necessary information.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+## Technologies
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Languages:
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+Python 3.8.5: Used to write the whole app
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+### Dependencies
 
-## FAQ about the uptime script
+Heroku: used as a terminal to deploy the app.
+Google Sheets API library for accessing and modifying Google Sheets.
+google-auth: Google Authentication library.
+simple-term-menu: Library for creating terminal-based menus.
 
-**Why have you added this script?**
+### Standard library imports:
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+[os](https://docs.python.org/3/library/os.html ) was used to clear the terminal before running the program.
 
-**How will this affect me?**
+### Other tools:
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+[VSCode](https://code.visualstudio.com/) was used as the main tool to write and edit code.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+[GitHub](https://github.com/) was used to host the code of the website.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+## Resolved bugs
 
-**So….?**
+Through testing, we realized we needed to create a validation function to make sure the data introduced by the user is a non-negative numeric value, whether it's an integer or a float. This function, named verify_input, not only checks for the correctness of the input type but also ensures that the input is not an empty string, rejecting negative numbers. The get_valid_input function encapsulates the user input process, prompting the user until a valid input is provided, thus enhancing the robustness and reliability of our data processing.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+## Deployment
 
-**Can I opt out?**
+### Clone the repository to your local machine:
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+git clone https://github.com/your-username/BakeBakery.git
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+### Install the required dependencies: 
 
-**Anything more?**
+pip install gspread google-auth simple-term-menu
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+### Set up Google Sheets API:
 
----
+* Follow the instructions in the gspread documentation to create and download a service account key in JSON format.
+* Place the downloaded JSON key file in the project directory and name it creds.json.
+* Create a Google Sheets document and name it 'BakeryBake'. Share it with the email address provided in the client_email field of the creds.json file.
 
-Happy coding!
+### Configure Heroku GitHub Integration:
+
+* Navigate to the Deploy tab of your Heroku app in the Heroku Dashboard.
+* Enable GitHub integration by authenticating with GitHub.
+* Ensure that your GitHub repository has admin access, as this is required for configuring automatic GitHub deploys.
+* Link your Heroku app to a GitHub repo in the Deploy tab.
+* Optionally, configure manual or automatic deploys based on your preferences.
+
+### Run the application on Heroku:
+
+* After setting up GitHub integration, you can deploy your app manually by selecting the desired branch and clicking "Deploy Branch."
+* For automatic deploys, any pushes to the specified GitHub branch will trigger Heroku to build and deploy the changes.
+
+### Additional Notes:
+
+* View build output and historical build information in the application’s Activity tab on the Heroku Dashboard.
+* Ensure that the GitHub repository is accessible and the GitHub integration has the necessary permissions for smooth deployment.
+* For troubleshooting or additional information, refer to the Heroku GitHub Integration FAQ.
+
+<br>
+
+![Code Institute Python verification print screen](documentation/verification.png)
+
+## Verification
+
+I verified all code in the Code Institute CI Python Linter
+
+## Contributors
+
+Dinis Machado
+
+## Credits
+
+- [Google Sheets](https://www.google.com/sheets/about/)
+
+- [Code institute Google Sheets connection with Python walk-through](https://codeinstitute.net/se/)
+
+- [Code institute Heroku deployment walk-through](https://codeinstitute.net/se/)
+
+- Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
+
+## Acknowledgments
+
+I am enormously thankful to my mentors Juliia Konn and Alex K. for their guidance and valuable feedback!
