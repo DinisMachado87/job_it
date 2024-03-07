@@ -2,32 +2,11 @@ README
 # Job it. 
  Job Search Management app
 
-![Responsive Mockup](path placeholder)
+*The link to [Job it.](https://jobit-e6faad3e8aa6.herokuapp.com/)*
 
-*The link to [Job it.](https:Link/)*
+## Overview
 
-## Introduction
-
-
-## Features
-
-![img description](image path)
-
-### Feature items
-
-## How to Use
-
-Click the link to [Job ite](link) or paste 'link' in your browser.
-
-## Technologies
-
-### First Provisory Strucure Draft
-
-![img description](image path)
-
-### Current PEntity ERD
-
-![img description](image path)
+The Job Search Management App is a web application designed to help users manage their job search process effectively. It allows users to set up their dream job preferences, track job applications, visualize job matches, and manage application statuses. The app provides a user-friendly interface for organising and optimising the job search process, helping users find jobs that best match their preferences.
 
 ## User Stories
 
@@ -107,17 +86,67 @@ As a user, I want the commute distance to be automatically calculated for each j
 
 ## Resolved bugs
 
-## Deployment
+## Debugging the Database
 
-### Clone the repository to your local machine:
+When originally attempting to run migrations or start the Django server, the following error occured:
 
-git clone https://github.com/your-username/BakeBakery.git
+> (!Warning]
+django.core.exceptions.AppRegistryNotReady: Models aren't loaded yet.
 
-<br>
 
-![Verification print screen](img path)
+During the process of debugging the database-related issues, several solutions were attempted to address the "Models aren't loaded yet" error. Each solution aimed to ensure that database queries were performed at the appropriate time and that Django models were fully initialized before accessing them.
 
-## Verification
+
+1. **Moving Database Queries into Callable Methods**:
+   Initially, I tried moving database queries into functions within the models.py file. For example, instead of directly assigning choices to fields, I defined methods to retrieve choices when needed. However, this approach didn't fully solve the problem because Django models weren't fully ready when the models.py file was loaded.
+
+   ```
+   class Location(models.Model):
+       @staticmethod
+       def get_choices():
+           return Location.objects.values_list('id', 'choice')
+   ```
+
+2. **Reusable get_choices Function**:
+   Another attempt was to create a reusable function to get choices for any model class. This function aimed to centralize the logic for retrieving choices. However, it faced the same issue as before because Django models weren't fully initialized at the time of import.
+
+   ```
+   def get_choices(model_class):
+       return model_class.objects.values_list('id', 'choice')
+   ```
+
+3. **Using a Callable Class**:
+   To overcome the issue with directly querying the database in functions called at import time, I tried using a callable class. This class, named ChoiceGetter, was instantiated by Django when it was ready to get the choices. However, it caused a new problem where Django expected choices to be an iterable, but it received a callable instead.
+
+   ```
+   class ChoiceGetter:
+       def __call__(self, model_class):
+           return model_class.objects.values_list('id', 'choice')
+   ```
+
+4. **Modifying the ChoiceGetter Class**:
+   To fix the issue with Django expecting choices to be an iterable, I modified the ChoiceGetter class to return choices as a list or tuple when called. This ensured that the choices were in the correct format for Django's expectations.
+
+   ```
+   class ChoiceGetter:
+       def __call__(self, model_class):
+           choices = model_class.objects.values_list('id', 'choice')
+           return list(choices)
+   ```
+
+5. **Moving Logic to View or Form**:
+   Finally, I realized that forms are processed after all models are loaded in Django. So, I moved the logic of setting choices to the form. This ensured that models were fully loaded before attempting to access them, avoiding issues with models not being ready at the time of import.
+
+   ```
+   class JobForm(forms.ModelForm):
+       def __init__(self, *args, **kwargs):
+           super().__init__(*args, **kwargs)
+           self.fields['schedule_type'].choices = get_choices(ScheduleType)
+           # Other fields' choices set similarly...
+   ``` 
+
+By experimenting with these different approaches and considering the timing of model initialization, eventually the issues were resolved, leading to a stable and functional database implementation.
+
 
 ## Contributors
 
@@ -125,4 +154,8 @@ Dinis Machado
 
 ## Credits
 
+[Code with Mosh](https://codewithmosh.com)
+
 ## Acknowledgments
+
+A special thank you to the Oversight and discussion insight from my Code Institute mentor Juliia Konn
