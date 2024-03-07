@@ -6,7 +6,7 @@ README
 
 ## Overview
 
-The Job Search Management App is a web application designed to help users manage their job search process effectively. It allows users to set up their dream job preferences, track job applications, visualize job matches, and manage application statuses. The app provides a user-friendly interface for organising and optimising the job search process, helping users find jobs that best match their preferences.
+The Job Search Management App is a web application designed to help users manage their job search process effectively. It allows users to set up their dream job preferences, track job applications, visualize job matches, and manage application statuses. The app provides a user-friendly interface for organizing and optimizing the job search process, helping users find jobs that best match their preferences.
 
 ## User Stories
 
@@ -14,7 +14,7 @@ The Job Search Management App is a web application designed to help users manage
 
 As a user, I can create a profile with my dream job preferences so that I can set up my job search criteria.
 
-- AC1: I can specify preferences such as relocation, commuting distance, work from home option, salary range, etc.
+- AC1: I can specify preferences such as relocation, commuting distance, work-from-home option, salary range, etc.
 
 - AC2: I can save my preferences for future reference.
 
@@ -28,7 +28,7 @@ As a user, I can add job profiles to my profile to track jobs I want to apply to
 
 #### Automatically Update Dream Job Preferences:
 
-As a user, I want my dream job preference choices to be automatically updated when I add a new option with a new job profile, so that my preferences stay up-to-date.
+As a user, I want my dream job preference choices to be automatically updated when I add a new option with a new job profile so that my preferences stay up-to-date.
 
 - AC1: Whenever I add a new job profile, I am prompted to review and update my dream job preferences if needed.
 
@@ -56,7 +56,7 @@ As a user, I can choose how many of the top matching jobs I want to see in the c
 
 As a user, I can choose the main criteria of the jobs to be visible in the header of the job matching chart for easier comparison.
 
-- AC1: I can select the criteria such as salary range, commuting distance, work from home option, etc., to be displayed in the chart header.
+- AC1: I can select the criteria such as salary range, commuting distance, work-from-home option, etc., to be displayed in the chart header.
 
 #### Access Job Management Board:
 
@@ -90,22 +90,23 @@ As a user, I want the commute distance to be automatically calculated for each j
 
 When originally attempting to run migrations or start the Django server, the following error occured:
 
-> (!Warning]
-django.core.exceptions.AppRegistryNotReady: Models aren't loaded yet.
-
+    '''
+    > [!Error]
+    django.core.exceptions.AppRegistryNotReady: Models aren't loaded yet.
+    '''
 
 During the process of debugging the database-related issues, several solutions were attempted to address the "Models aren't loaded yet" error. Each solution aimed to ensure that database queries were performed at the appropriate time and that Django models were fully initialized before accessing them.
 
 
 1. **Moving Database Queries into Callable Methods**:
-   Initially, I tried moving database queries into functions within the models.py file. For example, instead of directly assigning choices to fields, I defined methods to retrieve choices when needed. However, this approach didn't fully solve the problem because Django models weren't fully ready when the models.py file was loaded.
+Initially, I tried moving database queries into functions within the models.py file. For example, instead of directly assigning choices to fields, I defined methods to retrieve choices when needed. However, this approach didn't fully solve the problem because Django models weren't fully ready when the models.py file was loaded.
 
-   ```
-   class Location(models.Model):
+    ```
+    class Location(models.Model):
        @staticmethod
        def get_choices():
            return Location.objects.values_list('id', 'choice')
-   ```
+    ```
 
 2. **Reusable get_choices Function**:
    Another attempt was to create a reusable function to get choices for any model class. This function aimed to centralize the logic for retrieving choices. However, it faced the same issue as before because Django models weren't fully initialized at the time of import.
