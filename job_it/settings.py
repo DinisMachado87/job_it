@@ -27,12 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'http://127.0.0.1:8000/',
     '.herokuapp.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost',
+    '8000-dinismachado87-jobit-6ae3ouaxjke.ws-eu108.gitpod.io',
 ]
 
 
@@ -122,6 +124,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
