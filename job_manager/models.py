@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Job criteria choices variables
 CHOICES_office_days = (
-    (0, 'Working from home'), 
+    (0, 'Working from hom'), 
     (1, '1'), 
     (2, '2'), 
     (3, '3'), 
@@ -14,18 +14,20 @@ CHOICES_office_days = (
     (7, '7')
 )
 CHOICES_responsibility = (
-    (0, 'Manager'), 
-    (1, 'Supervisor'), 
-    (2, 'Team Leader'), 
-    (3, 'Employee')
+    (0, 'Not applicable'), 
+    (1, 'Manager'), 
+    (2, 'Supervisor'), 
+    (3, 'Team Leader'), 
+    (4, 'Employee')
 )
 CHOICES_schedule_type = (
-    (0, 'Fixed'), 
-    (1, 'Flexible'), 
-    (2, 'Remote')
+    (0, 'Not applicable'), 
+    (1, 'Fixed'), 
+    (2, 'Flexible'), 
+    (3, 'Remote')
 )
 CHOICES_starting_time = (
-    (0, 'not_applicable'), 
+    (0, 'Not applicable'), 
     (1, '6:00am'), 
     (2, '6:30am'),
     (3, '7:00am'),
@@ -76,9 +78,10 @@ CHOICES_starting_time = (
     (48, '5:30am'),
 )
 CHOICES_company_size = (
-    (0, 'Small'), 
-    (1, 'Medium'), 
-    (2, 'Large')
+    (0, 'Not applicable'), 
+    (1, 'Small'), 
+    (2, 'Medium'), 
+    (3, 'Large')
 )
 CHOICES_bring_pet = (
     (0, 'Yes'), 
@@ -106,11 +109,12 @@ CHOICES_freelance_hire = (
     (1, 'No')
 )
 CHOICES_status = (
-    (0, 'considering'), 
-    (1, 'applied'), 
-    (2, 'interviewing'), 
-    (3, 'rejected'), 
-    (4, 'accepted')
+    (0, 'Not applicable'), 
+    (1, 'Considering'), 
+    (2, 'Applied'), 
+    (3, 'Interviewing'), 
+    (4, 'Rejected'), 
+    (5, 'Accepted')
 )
 
 class Job(models.Model):
@@ -120,6 +124,8 @@ class Job(models.Model):
         on_delete=models.CASCADE,
         related_name="user_jobs"
     )
+    # Dream job reference
+    is_dream_job = models.BooleanField(default=False)
     # Job description
     job_to_apply = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
@@ -205,3 +211,69 @@ class Job(models.Model):
         default=0,
         help_text="Current status of the job application"
     )
+    # Match percentage
+    match_percentage = models.IntegerField(default=0)
+
+    '''
+    Calculate the match percentage between the current job and the dream job.
+
+    The match percentage is calculated by comparing the current job 
+    with the dream job 
+    and calculating the percentage difference between each field. 
+    The average percentage difference across all fields 
+    is then calculated to determine the overall match percentage.
+
+    The match percentage is used to rank the job applications based 
+    on how closely they match the user's dream job criteria.
+    '''
+    def calculate_match_percentage(self):
+        # Retrieve the dream job for this user
+        dream_job = Job.objects.filter(
+            user=self.user, is_dream_job=True).first()
+
+        if not dream_job:
+            # If there's no dream job defined, return 0% match
+            return 0
+
+        total_fields = 0
+        total_percentage = 0
+
+        # Calculate match percentage for each field and accumulate the total
+        for field in self._meta.fields:
+            if field.name not in [
+                'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status']:
+                # Increment the total fields count
+                total_fields += 1
+
+                # Get the corresponding values for the current job and the dream job
+                dream_value = getattr(dream_job, field.name)
+                current_value = getattr(self, field.name)
+
+                # Skip comparison for 'Not applicable' options
+                if dream_value == 0 or current_value == 0:
+                    continue
+
+                if dream_value == current_value:
+                    field_percentage = 100  # Field values match exactly
+                else:
+                    
+                    # Calculate the percentage difference 
+                    #between the current job and the dream job
+                    field_percentage = 100 - abs(dream_value - current_value)
+                    # Ensure percentage doesn't go negative
+                    field_percentage = max(field_percentage, 0)
+
+                # Accumulate the percentage difference to the total percentage
+                total_percentage += field_percentage
+
+        if total_fields > 0:
+            # Calculate the average match percentage across all fields
+            match_percentage = total_percentage / total_fields
+        else:
+            # If there are no fields to compare, return 0% match
+            match_percentage = 0
+
+        return match_percentage
+
+    class Meta:
+        ordering = ['-match_percentage']
