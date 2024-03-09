@@ -84,6 +84,23 @@ As a user, I want the commute distance to be automatically calculated for each j
 
 [GitHub](https://github.com/) was used to host the code of the website.
 
+
+## Functionality
+
+### Dream Job Matching Functionality
+
+I've implemented a dream job matching functionality using a function inside the job Model. The goal of this function is to match job applications with the user’s dream job criteria and rank them based on how closely they align.
+
+#### Functionality Overview
+
+- **Job Model**: I defined a Django model named `Job` to represent job applications. This model includes various fields such as commute time, office days, responsibility level, etc., each with corresponding choices defined.
+  
+- **Dream Job Reference**: I added a boolean field `is_dream_job` to indicate whether a particular job application is the user dream job. This reference job serves as the baseline for comparing other job applications.
+
+- **Match Percentage Calculation**: I implemented a method `calculate_match_percentage()` within the `Job` model. This method calculates the match percentage between a job application and the users dream job. It compares each field of the job application with the corresponding field of the dream job, calculates the percentage difference, and then averages these percentages to determine the overall match percentage.
+
+- **Sorting Jobs**: I implemented a Django Meta class to specify the ordering of job applications based on their match percentage. Jobs with higher match percentages are ranked higher in the list, showing the user the most matching overall job applications to prioritise.
+
 ## Resolved bugs
 
 ## Debugging the Database
@@ -147,6 +164,19 @@ Initially, I tried moving database queries into functions within the models.py f
    ``` 
 
 By experimenting with these different approaches and considering the timing of model initialization, eventually the issues were resolved, leading to a stable and functional database implementation.
+
+
+## Reflection on Project Scope and Agile Development
+
+After two days of struggling with an error loop, I came to the realization that I needed to further reduce the scope of the project. Initially, my `models.py` file was extensive, aiming to cover a wide range of functionalities and options. However, this ambitious approach led to complexities and difficulties in implementation.
+
+The overwhelming moments during this process made me understand the importance and relevance of agile functionality in software development. Agile methodology emphasizes incremental and iterative development, allowing for adjustments and adaptations along the way. 
+
+In response to the challenges faced, I decided to streamline the project and implement functionality progressively. This shift in approach enabled me to focus on the core features and build them out more efficiently. It also helped in maintaining my mental health and avoiding burnout by breaking down the workload into manageable tasks.
+
+The `models.py` code was refactored to prioritize essential functionalities, focusing on the job matching aspect. By doing so, I was able to create a more robust and manageable codebase, ensuring better maintainability and scalability in the long run.
+
+Moving forward, I intend to continue embracing agile principles in my development process, recognizing their role in contributing to the successful and efficient development of applications. This experience has reinforced the importance of adaptability and flexibility in tackling software development challenges.
 
 
 ## Contributors
