@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job List</title>
+    <style>
+        .job-info p {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Dream Job chart</h1>
+    {% for job in object_list %}
+    <div class='job-info'>
+        <p>{{ job.get_status_display }}</p>
+        <p><strong>{{ job.job_to_apply }}</strong></p>
+        <p>{{ job.pay }}</p>
+        <p>{{ job.full_time_percentage }}</p>
+        <p>{{ job.get_responsibility_display }}</p>
+        <p>{{ job.commute_time }}</p>
+        <p>{{ job.get_office_days_display }}</p>
+        <p>{{ job.holiday_days }}</p>
+        <p>{{ job.get_schedule_type_display }}</p>
+        <p>{{ job.get_starting_time_display }}</p>
+        <p>{{ job.get_company_size_display }}</p>
+        <p>{{ job.get_bring_pet_display }}</p>
+        <p>{{ job.get_office_type_display }}</p>
+        <p>{{ job.get_own_computer_display }}</p>
+        <p>{{ job.get_pet_sitter_display }}</p>
+        <p>{{ job.get_child_care_display }}</p>
+        <p>{{ job.get_freelance_hire_display }}</p>
+    </div>
+    {% endfor %}
+</body>
+
+</html>

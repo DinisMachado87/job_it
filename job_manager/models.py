@@ -4,14 +4,15 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Job criteria choices variables
 CHOICES_office_days = (
-    (0, 'Working from hom'), 
-    (1, '1'), 
-    (2, '2'), 
-    (3, '3'), 
-    (4, '4'), 
-    (5, '5'), 
-    (6, '6'), 
-    (7, '7')
+    (0, 'Not applicable'), 
+    (1, 'Working from home'), 
+    (2, '1'), 
+    (3, '2'), 
+    (4, '3'), 
+    (5, '4'), 
+    (6, '5'), 
+    (7, '6'), 
+    (8, '7')
 )
 CHOICES_responsibility = (
     (0, 'Not applicable'), 
@@ -83,30 +84,16 @@ CHOICES_company_size = (
     (2, 'Medium'), 
     (3, 'Large')
 )
-CHOICES_bring_pet = (
-    (0, 'Yes'), 
-    (1, 'No')
-)
-CHOICES_own_computer = (
-    (0, 'Yes'), 
-    (1, 'No')
+CHOICES_yes_no = (
+    (0, 'Not applicable'),
+    (1, 'Yes'), 
+    (2, 'No')
 )
 CHOICES_office_type = (
-    (0, 'Open'), 
-    (1, 'Cubicle'), 
-    (2, 'Private')
-)
-CHOICES_pet_sitter = (
-    (0, 'Yes'), 
-    (1, 'No')
-)
-CHOICES_child_care = (
-    (0, 'Yes'), 
-    (1, 'No')
-)
-CHOICES_freelance_hire = (
-    (0, 'Yes'), 
-    (1, 'No')
+    (0, 'Not applicable'), 
+    (1, 'Open'), 
+    (2, 'Cubicle'), 
+    (3, 'Private')
 )
 CHOICES_status = (
     (0, 'Not applicable'), 
@@ -177,12 +164,12 @@ class Job(models.Model):
         help_text="Size of the company"
     )
     bring_pet = models.IntegerField(
-        choices=CHOICES_bring_pet,
+        choices=CHOICES_yes_no,
         default=1,
         help_text="Whether pets are allowed in the office"
     )
     own_computer = models.IntegerField(
-        choices=CHOICES_own_computer,
+        choices=CHOICES_yes_no,
         default=1,
         help_text="Whether you need to bring your own computer"
     )
@@ -192,17 +179,17 @@ class Job(models.Model):
         help_text="Type of office layout"
     )
     pet_sitter = models.IntegerField(
-        choices=CHOICES_pet_sitter,
+        choices=CHOICES_yes_no,
         default=1,
         help_text="Availability of pet sitter close to the office"
     )
     child_care = models.IntegerField(
-        choices=CHOICES_child_care,
+        choices=CHOICES_yes_no,
         default=1,
         help_text="Availability of child care close to the office"
     )
     freelance_hire = models.IntegerField(
-        choices=CHOICES_freelance_hire,
+        choices=CHOICES_yes_no,
         default=0,
         help_text="If you will be invoicing the company or hired as an employee"
     )
