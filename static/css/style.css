@@ -1,0 +1,17 @@
+body {
+    background-color: #6610f2;
+}
+
+.job-info {
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 2rem   ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-info p {
+    display: inline-block;
+    margin-right: 20px;
+}

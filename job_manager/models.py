@@ -89,6 +89,11 @@ CHOICES_yes_no = (
     (1, 'Yes'), 
     (2, 'No')
 )
+CHOICES_freelance_hired = (
+    (0, 'Not applicable'),
+    (1, 'Freelance'), 
+    (2, 'Employed')
+)
 CHOICES_office_type = (
     (0, 'Not applicable'), 
     (1, 'Open'), 
@@ -213,6 +218,7 @@ class Job(models.Model):
     The match percentage is used to rank the job applications based 
     on how closely they match the user's dream job criteria.
     '''
+
     def calculate_match_percentage(self):
         # Retrieve the dream job for this user
         dream_job = Job.objects.filter(
@@ -262,5 +268,7 @@ class Job(models.Model):
 
         return match_percentage
 
+    # Save the match percentage to the database
     class Meta:
         ordering = ['-match_percentage']
+

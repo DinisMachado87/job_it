@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- index.html content starts here -->
+<div class="container-fluid">
+    <div class="row">
+
+                <h1 class="invisible">Dream Job chart</h1>
+                <!-- Dream Job chart -->
+                <div class="col-md-12">
+                {% for job in object_list %}
+                <div class='job-info  bg-info'>
+                    <p>{{ job.get_status_display }}</p>
+                    <p><strong>{{ job.job_to_apply }}</strong></p>
+                    <p>{{ job.pay }}</p>
+                    <p>{{ job.full_time_percentage }}</p>
+                    <p>{{ job.get_responsibility_display }}</p>
+                    <p>{{ job.commute_time }}</p>
+                    <p>{{ job.get_office_days_display }}</p>
+                    <p>{{ job.holiday_days }}</p>
+                    <p>{{ job.get_schedule_type_display }}</p>
+                    <p>{{ job.get_starting_time_display }}</p>
+                    <p>{{ job.get_company_size_display }}</p>
+                    <p>{{ job.get_bring_pet_display }}</p>
+                    <p>{{ job.get_office_type_display }}</p>
+                    <p>{{ job.get_own_computer_display }}</p>
+                    <p>{{ job.get_pet_sitter_display }}</p>
+                    <p>{{ job.get_child_care_display }}</p>
+                    <p>{{ job.get_freelance_hire_display }}</p>
+                </div>
+                {% if forloop.counter|divisibleby:15 %}
+                </div>
+                <div class="col-md-12">
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- index.html content ends here -->
+{% endblock %}
