@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_extensions',
     'job_manager',
+    'django_summernote',
     'crispy_forms',
 ]
 
