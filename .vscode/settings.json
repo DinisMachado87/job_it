@@ -23,8 +23,5 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Modern Dark Monokai",
    "terminal.integrated.gpuAcceleration": "canvas",
-   "editor.defaultFormatter": "HookyQR.beautify",
-   "[django-html]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-   }
+   "editor.defaultFormatter": "HookyQR.beautify"
 }
