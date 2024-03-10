@@ -101,6 +101,17 @@ I've implemented a dream job matching functionality using a function inside the 
 
 - **Sorting Jobs**: I implemented a Django Meta class to specify the ordering of job applications based on their match percentage. Jobs with higher match percentages are ranked higher in the list, showing the user the most matching overall job applications to prioritise.
 
+
+### Usage
+
+To use this job matching functionality:
+
+1. **Define Dream Job**: when creating a user profile the user is prompted to create a Dream job set of references that can later e edited but not deleted unles with the deletion of the profie.
+
+2. **Submit Job Applications**: the user can then submit multiple job applications. The match percentage for each application will be automatically calculated and updated based on its alignment with their dream job criteria.
+
+3. **Review Job Applications**: Job applications are sorted based on their match percentage, allowing the user to prioritize and focus on the most relevant opportunities.
+
 ## Resolved bugs
 
 ## Debugging the Database

@@ -4,8 +4,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Job criteria choices variables
 CHOICES_office_days = (
-    (0, 'Not applicable'),
-    (1, 'Working from home'),
+    (0, 'N/a'),
+    (1, 'Work f/home'),
     (2, '1'),
     (3, '2'),
     (4, '3'),
@@ -15,20 +15,20 @@ CHOICES_office_days = (
     (8, '7')
 )
 CHOICES_responsibility = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Manager'),
     (2, 'Supervisor'),
     (3, 'Team Leader'),
     (4, 'Employee')
 )
 CHOICES_schedule_type = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Fixed'),
     (2, 'Flexible'),
     (3, 'Remote')
 )
 CHOICES_starting_time = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, '6:00am'),
     (2, '6:30am'),
     (3, '7:00am'),
@@ -79,29 +79,29 @@ CHOICES_starting_time = (
     (48, '5:30am'),
 )
 CHOICES_company_size = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Small'),
     (2, 'Medium'),
     (3, 'Large')
 )
 CHOICES_yes_no = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Yes'),
     (2, 'No')
 )
 CHOICES_freelance_hired = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Freelance'),
     (2, 'Employed')
 )
 CHOICES_office_type = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Open'),
     (2, 'Cubicle'),
     (3, 'Private')
 )
 CHOICES_status = (
-    (0, 'Not applicable'),
+    (0, 'N/a'),
     (1, 'Considering'),
     (2, 'Applied'),
     (3, 'Interviewing'),

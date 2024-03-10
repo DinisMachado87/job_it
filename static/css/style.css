@@ -1,25 +1,64 @@
 body {
-    background-color: #6610f2;
+    background-color: #3d0795;
+}
+
+brand {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bg-info {
+    background-color: #3589cd;
 }
 
 .job-info {
     border-radius: 1rem;
-    padding: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    padding: 0rem;
+    margin-left: 0rem;
+    margin-right: 0rem;
     margin-top: 2rem   ;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.job-info p {
-    display: inline-block;
-    margin-right: 4rem;
+.job-info div {
+    margin: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.job-info a {
+    font-size: 0.7rem;
+}
+
+.title-job-info {
+    font-size: 0.8rem;
+    color: red;
+    font-weight: bold;
+}
+
+.title-job-info div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .btn {
     border-radius: 1rem;
 }
 
-char-nav {
+.chart-nav {
     margin-top: 2rem;
+}
+
+.chart-nav {
+    font-size: 0.8rem;
+}
+
+.pad-right {
+    margin-right: 5rem;
 }

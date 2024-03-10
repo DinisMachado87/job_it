@@ -4,31 +4,52 @@
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
-    <div class="row">
+    
+    <div>
         <h1 class="invisible">Dream Job chart</h1>
-        <!-- Dream Job chart -->
-        <div class="col-md-12">
+        <!-- Header Row -->
+        <div class="container-fluid">
+            <div class="title-job-info text-danger row">
+                <div class="mx-auto col d-none d-sm-block">Status</div>
+                <div class="mx-auto col-lg-1 col-md-2 col-3">Job</div>
+                <div class="mx-auto col">Pay</div>
+                <div class="mx-auto col d-none d-sm-block">FT %</div>
+                <div class="mx-auto col d-none d-md-block">Responsibility</div>
+                <div class="mx-auto col d-none d-md-block">Commute</div>
+                <div class="mx-auto col d-none d-lg-block">Office Days</div>
+                <div class="mx-auto col d-none d-lg-block">Holidays</div>
+                <div class="mx-auto col d-none d-lg-block">Schedule</div>
+                <div class="mx-auto col d-none d-lg-block">Start Time</div>
+                <div class="mx-auto col d-none d-xl-block">Company Size</div>
+                <div class="mx-auto col d-none d-xl-block">Own Computer</div>
+                <div class="mx-auto col d-none d-xl-block">Office Type</div>
+                <div class="mx-auto col d-none d-xl-block">Child Care</div>
+                <div class="mx-auto col d-none d-xl-block">Freelance</div>
+                <div class="pad-right mx-auto col">Edit</div>
+                <div class="pad-right mx-auto col">Delete</div>
+            </div>
+        </div>
+        <!-- Data Rows -->
+        <div class="container-fluid">
             {% for job in object_list %}
-            <div class='job-info bg-info'>
-                <p>{{ job.get_status_display }}</p>
-                <p><strong>{{ job.job_to_apply }}</strong></p>
-                <p>{{ job.pay }}</p>
-                <p>{{ job.full_time_percentage }}</p>
-                <p>{{ job.get_responsibility_display }}</p>
-                <p>{{ job.commute_time }}</p>
-                <p>{{ job.get_office_days_display }}</p>
-                <p>{{ job.holiday_days }}</p>
-                <p>{{ job.get_schedule_type_display }}</p>
-                <p>{{ job.get_starting_time_display }}</p>
-                <p>{{ job.get_company_size_display }}</p>
-                <p>{{ job.get_bring_pet_display }}</p>
-                <p>{{ job.get_own_computer_display }}</p>
-                <p>{{ job.get_office_type_display }}</p>
-                <p>{{ job.get_pet_sitter_display }}</p>
-                <p>{{ job.get_child_care_display }}</p>
-                <p>{{ job.get_freelance_hire_display }}</p>
-                <a href="{% url 'edit_job' job.slug %}" class="btn btn-dark">Edit</a>
-                <a href="{% url 'delete_job' job.slug %}" class="btn btn-dark">Delete</a>
+            <div class="job-info bg-info row">
+                <div class="mx-auto col d-none d-sm-block">{{ job.get_status_display }}</div>
+                <div class="mx-auto col-lg-1 col-md-2 col-3"><strong>{{ job.job_to_apply }}</strong></div>
+                <div class="mx-auto col">{{ job.pay }}</div>
+                <div class="mx-auto col d-none d-sm-block">{{ job.full_time_percentage }}</div>
+                <div class="mx-auto col d-none d-md-block">{{ job.get_responsibility_display }}</div>
+                <div class="mx-auto col d-none d-md-block">{{ job.commute_time }}</div>
+                <div class="mx-auto col d-none d-lg-block">{{ job.get_office_days_display }}</div>
+                <div class="mx-auto col d-none d-lg-block">{{ job.holiday_days }}</div>
+                <div class="mx-auto col d-none d-lg-block">{{ job.get_schedule_type_display }}</div>
+                <div class="mx-auto col d-none d-lg-block">{{ job.get_starting_time_display }}</div>
+                <div class="mx-auto col d-none d-xl-block">{{ job.get_company_size_display }}</div>
+                <div class="mx-auto col d-none d-xl-block">{{ job.get_own_computer_display }}</div>
+                <div class="mx-auto col d-none d-xl-block">{{ job.get_office_type_display }}</div>
+                <div class="mx-auto col d-none d-xl-block">{{ job.get_child_care_display }}</div>
+                <div class="mx-auto col d-none d-xl-block">{{ job.get_freelance_hire_display }}</div>
+                <div class="col"><a href="{% url 'edit_job' job.slug %}" class="btn btn-dark">Edit</a></div>
+                <div class="col"><a href="{% url 'delete_job' job.slug %}" class="btn btn-dark">Delete</a></div>
             </div>
             {% if forloop.counter|divisibleby:15 %}
         </div>
@@ -37,16 +58,17 @@
             {% endfor %}
         </div>
     </div>
-
+    
     <!-- Buttons for Dream Job Chart -->
     <div class="row text-center chart-nav">
-        <div class="col-md-4">
-            <button class="btn btn-dark dropdown-toggle col-sm" type="button" id="perPageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="col-md-4 col-sm-8">
+            <button class="btn btn-dark dropdown-toggle col-sm" type="button" id="perPageDropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Per Page
             </button>
             <div class="dropdown-menu" aria-labelledby="perPageDropdown">
-                <a class="dropdown-item" href="?per_page=10">10</a>
-                <a class="dropdown-item" href="?per_page=15">15</a>
+                <a class="dropdown-item" href="?per_page=5">10</a>
+                <a class="dropdown-item" href="?per_page=10">15</a>
                 <a class="dropdown-item" href="?per_page=20">20</a>
             </div>
         </div>
@@ -57,8 +79,6 @@
             <a href="{% url 'edit_dream_job' %}" class="btn btn-dark col-sm">Edit Dream Job</a>
         </div>
     </div>
-    
-    
 
     {% if is_paginated %}
     <nav aria-label="Page navigation">
