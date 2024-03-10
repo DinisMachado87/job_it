@@ -110,7 +110,7 @@ CHOICES_status = (
 )
 
 class Job(models.Model):
-    # User Info
+    """ Job class """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -206,20 +206,19 @@ class Job(models.Model):
     # Match percentage
     match_percentage = models.IntegerField(default=0)
 
-    '''
-    Calculate the match percentage between the current job and the dream job.
-
-    The match percentage is calculated by comparing the current job 
-    with the dream job 
-    and calculating the percentage difference between each field. 
-    The average percentage difference across all fields 
-    is then calculated to determine the overall match percentage.
-
-    The match percentage is used to rank the job applications based 
-    on how closely they match the user's dream job criteria.
-    '''
-
     def calculate_match_percentage(self):
+        '''
+        Calculate the match percentage between the current job and the dream job.
+
+        The match percentage is calculated by comparing the current job 
+        with the dream job 
+        and calculating the percentage difference between each field. 
+        The average percentage difference across all fields 
+        is then calculated to determine the overall match percentage.
+
+        The match percentage is used to rank the job applications based 
+        on how closely they match the user's dream job criteria.
+        '''
         # Retrieve the dream job for this user
         dream_job = Job.objects.filter(
             user=self.user, is_dream_job=True).first()

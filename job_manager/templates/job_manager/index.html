@@ -5,39 +5,54 @@
 <!-- index.html content starts here -->
 <div class="container-fluid">
     <div class="row">
-
-                <h1 class="invisible">Dream Job chart</h1>
-                <!-- Dream Job chart -->
-                <div class="col-md-12">
-                {% for job in object_list %}
-                <div class='job-info  bg-info'>
-                    <p>{{ job.get_status_display }}</p>
-                    <p><strong>{{ job.job_to_apply }}</strong></p>
-                    <p>{{ job.pay }}</p>
-                    <p>{{ job.full_time_percentage }}</p>
-                    <p>{{ job.get_responsibility_display }}</p>
-                    <p>{{ job.commute_time }}</p>
-                    <p>{{ job.get_office_days_display }}</p>
-                    <p>{{ job.holiday_days }}</p>
-                    <p>{{ job.get_schedule_type_display }}</p>
-                    <p>{{ job.get_starting_time_display }}</p>
-                    <p>{{ job.get_company_size_display }}</p>
-                    <p>{{ job.get_bring_pet_display }}</p>
-                    <p>{{ job.get_office_type_display }}</p>
-                    <p>{{ job.get_own_computer_display }}</p>
-                    <p>{{ job.get_pet_sitter_display }}</p>
-                    <p>{{ job.get_child_care_display }}</p>
-                    <p>{{ job.get_freelance_hire_display }}</p>
-                </div>
-                {% if forloop.counter|divisibleby:15 %}
-                </div>
-                <div class="col-md-12">
-                {% endif %}
-                {% endfor %}
-
+        <h1 class="invisible">Dream Job chart</h1>
+        <!-- Dream Job chart -->
+        <div class="col-md-12">
+            {% for job in object_list %}
+            <div class='job-info bg-info'>
+                <p>{{ job.get_status_display }}</p>
+                <p><strong>{{ job.job_to_apply }}</strong></p>
+                <p>{{ job.pay }}</p>
+                <p>{{ job.full_time_percentage }}</p>
+                <p>{{ job.get_responsibility_display }}</p>
+                <p>{{ job.commute_time }}</p>
+                <p>{{ job.get_office_days_display }}</p>
+                <p>{{ job.holiday_days }}</p>
+                <p>{{ job.get_schedule_type_display }}</p>
+                <p>{{ job.get_starting_time_display }}</p>
+                <p>{{ job.get_company_size_display }}</p>
+                <p>{{ job.get_bring_pet_display }}</p>
+                <p>{{ job.get_own_computer_display }}</p>
+                <p>{{ job.get_office_type_display }}</p>
+                <p>{{ job.get_pet_sitter_display }}</p>
+                <p>{{ job.get_child_care_display }}</p>
+                <p>{{ job.get_freelance_hire_display }}</p>
+                <a href="{% url 'edit_job' job.slug %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_job' job.slug %}" class="btn btn-primary">Delete</a>
             </div>
+            {% if forloop.counter|divisibleby:15 %}
+        </div>
+        <div class="col-md-12">
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
+
+    <!-- Buttons for Dream Job Chart -->
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="perPageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Per Page
+            </button>
+            <div class="dropdown-menu" aria-labelledby="perPageDropdown">
+                <a class="dropdown-item" href="?per_page=10">10</a>
+                <a class="dropdown-item" href="?per_page=15">15</a>
+                <a class="dropdown-item" href="?per_page=20">20</a>
+                <!-- Add more options as needed -->
+            </div>
+            <a href="{% url 'add_job' %}" class="btn btn-success">Add Job</a>
+    </div>
+
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
