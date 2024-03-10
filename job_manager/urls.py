@@ -7,4 +7,5 @@ urlpatterns = [
     path('edit_job/<slug:slug>/', views.EditJobView.as_view(), name='edit_job'),
     path('delete_job/<slug:slug>/',
          views.DeleteJobView.as_view(), name='delete_job'),
+    path('edit_dream_job/', views.EditDreamJobView.as_view(), name='edit_dream_job'),
 ]

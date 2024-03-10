@@ -13,5 +13,13 @@ body {
 
 .job-info p {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 4rem;
+}
+
+.btn {
+    border-radius: 1rem;
+}
+
+char-nav {
+    margin-top: 2rem;
 }

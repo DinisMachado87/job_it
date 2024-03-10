@@ -4,32 +4,32 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Job criteria choices variables
 CHOICES_office_days = (
-    (0, 'Not applicable'), 
-    (1, 'Working from home'), 
-    (2, '1'), 
-    (3, '2'), 
-    (4, '3'), 
-    (5, '4'), 
-    (6, '5'), 
-    (7, '6'), 
+    (0, 'Not applicable'),
+    (1, 'Working from home'),
+    (2, '1'),
+    (3, '2'),
+    (4, '3'),
+    (5, '4'),
+    (6, '5'),
+    (7, '6'),
     (8, '7')
 )
 CHOICES_responsibility = (
-    (0, 'Not applicable'), 
-    (1, 'Manager'), 
-    (2, 'Supervisor'), 
-    (3, 'Team Leader'), 
+    (0, 'Not applicable'),
+    (1, 'Manager'),
+    (2, 'Supervisor'),
+    (3, 'Team Leader'),
     (4, 'Employee')
 )
 CHOICES_schedule_type = (
-    (0, 'Not applicable'), 
-    (1, 'Fixed'), 
-    (2, 'Flexible'), 
+    (0, 'Not applicable'),
+    (1, 'Fixed'),
+    (2, 'Flexible'),
     (3, 'Remote')
 )
 CHOICES_starting_time = (
-    (0, 'Not applicable'), 
-    (1, '6:00am'), 
+    (0, 'Not applicable'),
+    (1, '6:00am'),
     (2, '6:30am'),
     (3, '7:00am'),
     (4, '7:30am'),
@@ -79,35 +79,36 @@ CHOICES_starting_time = (
     (48, '5:30am'),
 )
 CHOICES_company_size = (
-    (0, 'Not applicable'), 
-    (1, 'Small'), 
-    (2, 'Medium'), 
+    (0, 'Not applicable'),
+    (1, 'Small'),
+    (2, 'Medium'),
     (3, 'Large')
 )
 CHOICES_yes_no = (
     (0, 'Not applicable'),
-    (1, 'Yes'), 
+    (1, 'Yes'),
     (2, 'No')
 )
 CHOICES_freelance_hired = (
     (0, 'Not applicable'),
-    (1, 'Freelance'), 
+    (1, 'Freelance'),
     (2, 'Employed')
 )
 CHOICES_office_type = (
-    (0, 'Not applicable'), 
-    (1, 'Open'), 
-    (2, 'Cubicle'), 
+    (0, 'Not applicable'),
+    (1, 'Open'),
+    (2, 'Cubicle'),
     (3, 'Private')
 )
 CHOICES_status = (
-    (0, 'Not applicable'), 
-    (1, 'Considering'), 
-    (2, 'Applied'), 
-    (3, 'Interviewing'), 
-    (4, 'Rejected'), 
+    (0, 'Not applicable'),
+    (1, 'Considering'),
+    (2, 'Applied'),
+    (3, 'Interviewing'),
+    (4, 'Rejected'),
     (5, 'Accepted')
 )
+
 
 class Job(models.Model):
     """ Job class """
@@ -124,7 +125,7 @@ class Job(models.Model):
     job_description = models.TextField()
     # job criteria
     commute_time = models.IntegerField(
-        default=0, 
+        default=0,
         validators=[MinValueValidator(0), MaxValueValidator(120)],
         help_text="Commute time in minutes"
     )
@@ -134,7 +135,7 @@ class Job(models.Model):
         help_text="Number of office days per week"
     )
     full_time_percentage = models.IntegerField(
-        default=100, 
+        default=100,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         help_text="Percentage of full-time commitment"
     )
@@ -149,7 +150,7 @@ class Job(models.Model):
         help_text="pay for the job"
     )
     holiday_days = models.IntegerField(
-        default=20, 
+        default=20,
         validators=[MinValueValidator(0), MaxValueValidator(365)],
         help_text="Number of holiday days per year"
     )
@@ -233,7 +234,7 @@ class Job(models.Model):
         # Calculate match percentage for each field and accumulate the total
         for field in self._meta.fields:
             if field.name not in [
-                'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status']:
+                    'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status']:
                 # Increment the total fields count
                 total_fields += 1
 
@@ -248,9 +249,9 @@ class Job(models.Model):
                 if dream_value == current_value:
                     field_percentage = 100  # Field values match exactly
                 else:
-                    
-                    # Calculate the percentage difference 
-                    #between the current job and the dream job
+
+                    # Calculate the percentage difference
+                    # between the current job and the dream job
                     field_percentage = 100 - abs(dream_value - current_value)
                     # Ensure percentage doesn't go negative
                     field_percentage = max(field_percentage, 0)
@@ -271,3 +272,5 @@ class Job(models.Model):
     class Meta:
         ordering = ['-match_percentage']
 
+    def __str__(self):
+        return self.job_to_apply

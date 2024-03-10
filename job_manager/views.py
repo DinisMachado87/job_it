@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.contrib.auth.decorators import login_required
@@ -5,7 +6,7 @@ from .models import Job
 from .forms import JobForm  # Create a form for job creation/editing
 
 
-class JobListView(generic.ListView):
+class JobListView(LoginRequiredMixin, generic.ListView):
     template_name = 'job_manager/index.html'
     paginate_by = 15
 
@@ -28,14 +29,6 @@ class AddJobView(View):
             return redirect('home')
         return render(request, 'job_manager/add_job.html', {'form': form})
 
-# @login_required
-# def EditJobView(request, slug):
-#     # Retrieve the job for the logged-in user based on the slug
-#     job = get_object_or_404(Job, slug=slug, user=request.user)
-#     return render(request, 'job_manager/job_detail.html', {'job': job})
-
-    # Create a form for job creation/editing
-
 
 class EditJobView(View):
     def get(self, request, *args, **kwargs):
@@ -56,3 +49,18 @@ class EditJobView(View):
 class DeleteJobView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'job_manager/delete_job.html')
+
+
+class EditDreamJobView(View):
+    def get(self, request, *args, **kwargs):
+        dream_job = get_object_or_404(Job, slug='dream_job', user=request.user)
+        form = JobForm(instance=dream_job)
+        return render(request, 'job_manager/edit_dream_job.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        dream_job = get_object_or_404(Job, slug='dream_job', user=request.user)
+        form = JobForm(request.POST, instance=dream_job)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        return render(request, 'job_manager/edit_dream_job.html', {'form': form})

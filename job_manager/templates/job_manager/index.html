@@ -27,8 +27,8 @@
                 <p>{{ job.get_pet_sitter_display }}</p>
                 <p>{{ job.get_child_care_display }}</p>
                 <p>{{ job.get_freelance_hire_display }}</p>
-                <a href="{% url 'edit_job' job.slug %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'delete_job' job.slug %}" class="btn btn-primary">Delete</a>
+                <a href="{% url 'edit_job' job.slug %}" class="btn btn-dark">Edit</a>
+                <a href="{% url 'delete_job' job.slug %}" class="btn btn-dark">Delete</a>
             </div>
             {% if forloop.counter|divisibleby:15 %}
         </div>
@@ -39,19 +39,26 @@
     </div>
 
     <!-- Buttons for Dream Job Chart -->
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="perPageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="row text-center chart-nav">
+        <div class="col-md-4">
+            <button class="btn btn-dark dropdown-toggle col-sm" type="button" id="perPageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Per Page
             </button>
             <div class="dropdown-menu" aria-labelledby="perPageDropdown">
                 <a class="dropdown-item" href="?per_page=10">10</a>
                 <a class="dropdown-item" href="?per_page=15">15</a>
                 <a class="dropdown-item" href="?per_page=20">20</a>
-                <!-- Add more options as needed -->
             </div>
-            <a href="{% url 'add_job' %}" class="btn btn-success">Add Job</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="{% url 'add_job' %}" class="btn btn-dark col-sm">Add Job</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="{% url 'edit_dream_job' %}" class="btn btn-dark col-sm">Edit Dream Job</a>
+        </div>
     </div>
+    
+    
 
     {% if is_paginated %}
     <nav aria-label="Page navigation">
