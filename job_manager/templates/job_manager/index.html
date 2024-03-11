@@ -12,6 +12,7 @@
             <div class="job-info text-danger align-items-center rounded-pill row t thdr">
                 <div class="col"><p>Status</p></div>
                 <div class="col"><p>Job</p></div>
+                <div class="col"><p>Employer</p></div>
                 <div class="col"><p>Pay</p></div>
                 <div class="col d-none d-sm-block"><p>Work %</p></div>
                 <div class="col d-none d-sm-block"><p>Duty</p></div>
@@ -24,11 +25,15 @@
                 <div class="col d-none d-lg-block"><p>Bring Pet</p></div>
                 <div class="col d-none d-xl-block"><p>Own Computer</p></div>
                 <div class="col d-none d-xl-block"><p>Office Type</p></div>
-                <div class="col d-none d-xl-block s"><p>Pet Care</p></div>
-                <div class="col d-none d-xl-block s"><p>Child Care</p></div>
+                <div class="col d-none d-xl-block"><p>Pet Care</p></div>
+                <div class="col d-none d-xl-block"><p>Child Care</p></div>
                 <div class="col d-none d-xl-block"><p>Freelance</p></div>
-                <div class="col"><p></p>
-                <p></p></div>
+                <div class="col">
+                    <p></p>
+                </div>
+                <div>
+                    <p></p>
+                </div>
             </div>
         </div>
         <!-- Data Rows -->
@@ -37,6 +42,7 @@
             <div class="job-info pblue rounded-pill align-items-center row d-flex trow">
                 <div class="col"><p>{{ job.get_status_display }}</p></div>
                 <div class="col"><p><strong>{{ job.job_to_apply }}</strong></p></div>
+                <div class="col"><p><strong>{{ job.employer }}</strong></p></div>
                 <div class="col"><p>{{ job.pay }}</p></div>
                 <div class="col d-none d-sm-block"><p>{{ job.full_time_percentage }}</p></div>
                 <div class="col d-none d-sm-block"><p>{{ job.get_responsibility_display }}</p></div>
@@ -49,11 +55,15 @@
                 <div class="col d-none d-lg-block"><p>{{ job.get_bring_pet_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_own_computer_display }}</p></div>
                 <div class="col d-none d-xl-block "><p>{{ job.get_office_type_display }}</p></div>
-                <div class="col d-none d-xl-block s"><p>{{ job.get_pet_sitter_display }}</p></div>
-                <div class="col d-none d-xl-block s"><p>{{ job.get_child_care_display }}</p></div>
+                <div class="col d-none d-xl-block"><p>{{ job.get_pet_sitter_display }}</p></div>
+                <div class="col d-none d-xl-block"><p>{{ job.get_child_care_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_freelance_hire_display }}</p></div>
-                <div class="col"><p><a href="EDIT" class="btn rounded-pill btn-dark btn-sm edt">Edit</a></p>
-                <p><a href="DELETE" class="btn rounded-pill btn-dark btn-sm del">Delete</a></p></div>
+                <div class="col">
+                    <p><a href="EDIT" class="btn rounded-pill btn-dark btn-sm edt">Edit</a></p>
+                </div>
+                    <div>
+                    <p><a href="DELETE" class="btn rounded-pill btn-dark btn-sm del">Delete</a></p>
+                </div>
             </div>
             {% if forloop.counter|divisibleby:15 %}
         </div>

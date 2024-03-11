@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Job criteria choices variables
 CHOICES_office_days = (
     (0, 'n/a'),
-    (1, 'Work from home'),
+    (1, 'Work f/ home'),
     (2, '1'),
     (3, '2'),
     (4, '3'),
@@ -120,8 +120,9 @@ class Job(models.Model):
     # Dream job reference
     is_dream_job = models.BooleanField(default=False)
     # Job description
-    job_to_apply = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
+    job_to_apply = models.CharField(max_length=15)
+    Employer = models.CharField(max_length=15, default="")
+    slug = models.SlugField(max_length=15, unique=True)
     job_description = models.TextField()
     # job criteria
     commute_time = models.IntegerField(
@@ -145,8 +146,8 @@ class Job(models.Model):
         null=True,
         help_text="Job responsibility level"
     )
-    pay = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0.00,
+    pay = models.IntegerField(
+        validators=[MaxValueValidator(99999999)],
         help_text="pay for the job"
     )
     holiday_days = models.IntegerField(

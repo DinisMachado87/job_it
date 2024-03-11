@@ -7,5 +7,5 @@ class JobListView(generic.ListView):
     queryset = Job.objects.all()
     # template_name = 'job_list.html'
     template_name = 'job_manager/index.html'
-    paginate_by = 15
+    paginate_by = 10
     
