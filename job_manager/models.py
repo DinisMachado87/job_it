@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Job criteria choices variables
 CHOICES_office_days = (
     (0, 'n/a'),
-    (1, 'Work f home'),
+    (1, 'Work from home'),
     (2, '1'),
     (3, '2'),
     (4, '3'),

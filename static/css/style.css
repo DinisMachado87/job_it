@@ -2,16 +2,64 @@ body {
     background-color: #6610f2;
 }
 
-.job-info {
-    border-radius: 1rem;
-    padding: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    margin-top: 2rem   ;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.pblue {
+    background-color: rgb(0, 162, 255);
 }
 
-.job-info p {
-    display: inline-block;
-    margin-right: 20px;
+.brand {
+    font-size: 3rem;
+}
+
+/* table custom CSS*/
+.row > div {
+    width: 5%;
+}
+
+/* small columns */
+.s {
+    width: 2%;
+}
+
+/* Job chart */
+.job-info > div > p {
+    /* centering content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* diagonal content */
+    -webkit-transform: rotate(-35deg); 
+    -moz-transform: rotate(-35deg); 
+    -ms-transform: rotate(-35deg); 
+    -o-transform: rotate(-35deg); 
+    transform: rotate(-35deg);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865482, M12=0.7071067811865466, M21=-0.7071067811865466, M22=0.7071067811865482, SizingMethod='auto expand')";
+    filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865482, M12=0.7071067811865466, M21=-0.7071067811865466, M22=0.7071067811865482, SizingMethod='auto expand');
+}
+
+/* Job chart buttons */
+/* Delete button */
+.del {
+    transform: translateX(10px);
+}
+/* Edit button */
+.edt {
+    transform: translateX(-5px);
+}
+
+
+.job-info {
+    padding: 0.7rem 1rem 0.3rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.trow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+
+}
+
+.thdr {
+    font-weight: bold;
+    padding-bottom: 0rem;
 }
