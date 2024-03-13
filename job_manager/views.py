@@ -63,46 +63,62 @@ class AddJobView(LoginRequiredMixin, View):
 
 
 class EditJobView(LoginRequiredMixin, View):
-    def get(self, request):
-        # Check if dream job exists for the current user
-        user_id = request.user.id
-        dream_job_slug = f'dream_job_{user_id}'
-        dream_job = get_object_or_404(Job, slug=dream_job_slug, user=request.user)
-        # Renders the job to edit form
-        form = JobForm(instance=dream_job)
-        return render(request, 'job_manager/edit_job.html', {'form': form})
+    # Edit an existing job to apply form
+    def get(self, request, slug):
+        # Retrieve the job to edit using the slug and the user
+        job = get_object_or_404(Job, slug=slug, user=request.user)
+        form = JobForm(instance=job)
+        return render(request, 'job_manager/add_job.html', {'form': form})
 
-    def post(self, request):
-        # prepopulates the id hidden fields
-        user_id = request.user.id
-        dream_job_slug = f'dream_job_{user_id}'
-        dream_job = get_object_or_404(Job, slug=dream_job_slug, user=request.user)
-        form = JobForm(request.POST, instance=dream_job)
+    def post(self, request, slug):
+        # Save the edited job to apply object
+        job = get_object_or_404(Job, slug=slug, user=request.user)
+        form = JobForm(request.POST, instance=job)
         if form.is_valid():
-            form.save()
+            # Prepopulates id hidden fields
+            job = form.save(commit=False)
+            job.user = request.user
+            job.slug = slugify(job.job_to_apply)
+            job.save()
             return redirect('home')
+        # If the form is not valid, render the form with the errors
         return render(request, 'job_manager/add_job.html', {'form': form})
 
 
 class DeleteJobView(LoginRequiredMixin, View):
-    def get(self, request):
-        return render(request, 'job_manager/delete_job.html')
+    # Delete a job to apply object
+    def get(self, request, slug):
+        # Retrieve the job to delete using the slug and the user
+        job = get_object_or_404(Job, slug=slug, user=request.user)
+        return render(request, 'job_manager/delete_job.html', {'job': job})
+    # Confirm the deletion of the job to apply object
+    def post(self, request, slug):
+        # Delete the job to apply object
+        job = get_object_or_404(Job, slug=slug, user=request.user)
+        job.delete()
+        return redirect('home')
 
 
 class EditDreamJobView(LoginRequiredMixin, View):
+    # Edit the user's dream job form
     def get(self, request):
+        # Retrieve the user's dream job using the slug and the user
         user_id = request.user.id
         dream_job_slug = f'dream_job_{user_id}'
         dream_job = get_object_or_404(Job, slug=dream_job_slug, user=request.user)
         form = JobForm(instance=dream_job)
+        # Render the form with the user's dream job
         return render(request, 'job_manager/create_dream_job.html', {'form': form})
 
     def post(self, request):
+        # Save the user's dream job object
+        # Retrieve the user's dream job using the slug and the user
         user_id = request.user.id
         dream_job_slug = f'dream_job_{user_id}'
         dream_job = get_object_or_404(Job, slug=dream_job_slug, user=request.user)
         form = JobForm(request.POST, instance=dream_job)
         if form.is_valid():
+            # Prepopulates id hidden fields
             job = form.save(commit=False)
             job.user = request.user
             job.slug = dream_job_slug
@@ -112,7 +128,8 @@ class EditDreamJobView(LoginRequiredMixin, View):
             job.employer = 'Dream Employer'
             job.save()
             print('Form is valid')
+            # Redirect the user to Job chart index
             return redirect('home')
         else:
-            print("Form errors:", form.errors)
-        return render(request, 'job_manager/create_dream_job.html', {'form': form})
+            # If the form is not valid, render the form with the errors
+            return render(request, 'job_manager/create_dream_job.html', {'form': form})

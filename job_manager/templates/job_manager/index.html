@@ -52,15 +52,19 @@
                 <div class="col d-none d-lg-block"><p>{{ job.get_company_size_display }}</p></div>
                 <div class="col d-none d-lg-block"><p>{{ job.get_bring_pet_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_own_computer_display }}</p></div>
-                <div class="col d-none d-xl-block "><p>{{ job.get_office_type_display }}</p></div>
+                <div class="col d-none d-xl-block"><p>{{ job.get_office_type_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_pet_sitter_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_child_care_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_freelance_hire_display }}</p></div>
                 <div class="col">
-                    <p><a href="'edit_job' job.slug" class="btn rounded-pill btn-dark btn-sm">Edit</a></p>
+                    {% if not job.is_dream_job %}
+                        <p><a href="{% url 'edit_job' job.slug %}" class="btn rounded-pill btn-dark btn-sm">Edit</a></p>
+                    {% endif %}
                 </div>
-                <div>
-                    <p><a href="'delete_job' job.slug" class="btn rounded-pill btn-dark btn-sm">Delete</a></p>
+                <div class="col">
+                    {% if not job.is_dream_job %}
+                        <p><a href="{% url 'delete_job' job.slug %}" class="btn rounded-pill btn-dark btn-sm">Delete</a></p>
+                    {% endif %}
                 </div>
             </div>
             {% if forloop.counter|divisibleby:10 %}

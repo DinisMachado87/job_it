@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
 {% block content %}
 
-    <h1>Edit Job</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Job</button>
-        <a href="{% url 'home' %}">Cancel</a>
-
-    </form>
+<div class="container p-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-10 mt-3 pblue rounded-3 p-3">
+            <h1>Edit Job</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %} {{ form.as_p }}
+                <button type="submit">Save Job</button>
+                <a class="btn btn-dark" href="{% url 'home' %}">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

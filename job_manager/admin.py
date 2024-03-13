@@ -10,6 +10,7 @@ class JobAdmin(SummernoteModelAdmin):
     list_display = ('job_to_apply', 'pay', 'status', 'freelance_hire', 'responsibility', 'schedule_type', 'company_size', 'office_type')
     search_fields = ['job_description']
     list_filter = (
+        'user', 
         'freelance_hire', 
         'responsibility', 
         'schedule_type', 
