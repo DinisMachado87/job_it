@@ -21,4 +21,4 @@ class JobAdmin(SummernoteModelAdmin):
         'child_care', 
         'status'
         )
-    prepopulated_fields = {'slug': ('job_to_apply',)}
+    prepopulated_fields = {'slug': ('job_to_apply','employer'),}

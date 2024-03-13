@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <!-- index.html content starts here -->
 <div class="container-xxl">
-
     <div>
         <h1 class="invisible">Dream Job chart</h1>
         <!-- Header Row -->
         <div class="container-fluid ">
-            <div class="job-info text-danger align-items-center rounded-pill row t thdr">
+            <div class="job-info text-danger rounded-pill row t thdr">
                 <div class="col"><p>Status</p></div>
                 <div class="col"><p>Job</p></div>
                 <div class="col"><p>Employer</p></div>
@@ -39,7 +37,7 @@
         <!-- Data Rows -->
         <div class="container-fluid">
             {% for job in object_list %}
-            <div class="job-info pblue rounded-pill align-items-center row d-flex trow">
+            <div class="job-info pblue rounded-pill row d-flex trow">
                 <div class="col"><p>{{ job.get_status_display }}</p></div>
                 <div class="col"><p><strong>{{ job.job_to_apply }}</strong></p></div>
                 <div class="col"><p><strong>{{ job.employer }}</strong></p></div>
@@ -59,32 +57,38 @@
                 <div class="col d-none d-xl-block"><p>{{ job.get_child_care_display }}</p></div>
                 <div class="col d-none d-xl-block"><p>{{ job.get_freelance_hire_display }}</p></div>
                 <div class="col">
-                    <p><a href="EDIT" class="btn rounded-pill btn-dark btn-sm edt">Edit</a></p>
+                    <p><a href="'edit_job' job.slug" class="btn rounded-pill btn-dark btn-sm">Edit</a></p>
                 </div>
-                    <div>
-                    <p><a href="DELETE" class="btn rounded-pill btn-dark btn-sm del">Delete</a></p>
+                <div>
+                    <p><a href="'delete_job' job.slug" class="btn rounded-pill btn-dark btn-sm">Delete</a></p>
                 </div>
             </div>
-            {% if forloop.counter|divisibleby:15 %}
-        </div>
-        <div class="col-md-12">
+            {% if forloop.counter|divisibleby:10 %}
+            </div>
+            <div class="col-md-12">
             {% endif %}
             {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Buttons for Dream Job Chart -->
+    <div class="container-xl mt-4">
+        <div class="row justify-content-center">
+            {% if is_paginated %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
         </div>
     </div>
 
 </div>
 
-{% if is_paginated %}
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-        {% endif %}
-    </ul>
-</nav>
-{% endif %}
-</div>
 
 <!-- index.html content ends here -->
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container p-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-10 mt-3 pblue rounded-3 p-3">
+                <h2>Edit Your Dream Job Criteria</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != 'job_to_apply' and field.name != 'employer' and field.name != 'job_description' and field.name != 'user' and field.name != 'is_dream_job' and field.name != 'slug' %}
+                            <div class="row">
+                                <div class="col">
+                                    {{ field | as_crispy_field }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- Hidden inputs for required fields with default values -->
+                    <input type="hidden" name="job_to_apply" value="Dream Job">
+                    <input type="hidden" name="employer" value="Dream Employer">
+                    <input type="hidden" name="job_description" value="Dream Job">
+                    <input type="hidden" name="slug" value="dream-job">
+                    <input type="hidden" name="is_dream_job" value="True">
+                    <input type="hidden" name="user" value="{{ request.user.id }}">
+                    <input class="btn btn-dark" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

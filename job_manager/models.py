@@ -121,89 +121,87 @@ class Job(models.Model):
     is_dream_job = models.BooleanField(default=False)
     # Job description
     job_to_apply = models.CharField(max_length=15)
-    Employer = models.CharField(max_length=15, default="")
-    slug = models.SlugField(max_length=15, unique=True)
-    job_description = models.TextField()
+    employer = models.CharField(max_length=15, default="")
+    slug = models.SlugField(max_length=30, unique=True)
     # job criteria
     commute_time = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(120)],
-        help_text="Commute time in minutes"
+        help_text="in minutes"
     )
     office_days = models.IntegerField(
         choices=CHOICES_office_days,
         default=5,
-        help_text="Number of office days per week"
+        help_text="per week"
     )
     full_time_percentage = models.IntegerField(
         default=100,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        help_text="Percentage of full-time commitment"
     )
     responsibility = models.IntegerField(
         choices=CHOICES_responsibility,
         default=3,
         null=True,
-        help_text="Job responsibility level"
     )
     pay = models.IntegerField(
         validators=[MaxValueValidator(99999999)],
-        help_text="pay for the job"
+        default=0,
     )
     holiday_days = models.IntegerField(
         default=20,
         validators=[MinValueValidator(0), MaxValueValidator(365)],
-        help_text="Number of holiday days per year"
+        help_text="per year"
     )
     schedule_type = models.IntegerField(
         choices=CHOICES_schedule_type,
         default=0,
-        help_text="Type of work schedule"
     )
     starting_time = models.IntegerField(
         choices=CHOICES_starting_time,
         default=0,
-        help_text="Starting time of the work"
+        help_text="of the work day"
     )
     company_size = models.IntegerField(
         choices=CHOICES_company_size,
         default=1,
-        help_text="Size of the company"
     )
     bring_pet = models.IntegerField(
         choices=CHOICES_yes_no,
         default=1,
-        help_text="Whether pets are allowed in the office"
+        help_text="- Whether pets are allowed in the office"
     )
     own_computer = models.IntegerField(
         choices=CHOICES_yes_no,
         default=1,
-        help_text="Whether you need to bring your own computer"
+        help_text="- Whether you need to bring your own computer"
     )
     office_type = models.IntegerField(
         choices=CHOICES_office_type,
         default=0,
-        help_text="Type of office layout"
+        help_text="layout"
     )
     pet_sitter = models.IntegerField(
         choices=CHOICES_yes_no,
         default=1,
-        help_text="Availability of pet sitter close to the office"
+        help_text="available close to the office"
     )
     child_care = models.IntegerField(
         choices=CHOICES_yes_no,
         default=1,
-        help_text="Availability of child care close to the office"
+        help_text="available close to the office"
     )
     freelance_hire = models.IntegerField(
-        choices=CHOICES_yes_no,
+        choices=CHOICES_freelance_hired,
         default=0,
-        help_text="If you will be invoicing the company or hired as an employee"
+        help_text="- Invoicing the company vs hired as an employee"
     )
     status = models.IntegerField(
         choices=CHOICES_status,
         default=0,
-        help_text="Current status of the job application"
+        help_text="of the job application"
+    )
+    job_description = models.TextField(
+        default="Optinal notes",
     )
     # Match percentage
     match_percentage = models.IntegerField(default=0)
@@ -236,7 +234,7 @@ class Job(models.Model):
         # Calculate match percentage for each field and accumulate the total
         for field in self._meta.fields:
             if field.name not in [
-                    'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status']:
+                    'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status', 'job_description', 'match_percentage']:
                 # Increment the total fields count
                 total_fields += 1
 
