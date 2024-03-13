@@ -72,11 +72,54 @@ As a user, I want the commute distance to be automatically calculated for each j
 
 - AC1: The commuting distance is calculated based on the job location and my preferred mode of transportation.
 
+
 ## Languages:
 
 ### Dependencies
 
+## Dependencies
+
+- **[asgiref==3.7.2](https://pypi.org/project/asgiref/)**: ASGI (Asynchronous Server Gateway Interface) is a specification for building asynchronous Python web applications and servers. `asgiref` provides the base ASGI implementation for Python.
+  
+- **[dj-database-url==0.5.0](https://pypi.org/project/dj-database-url/)**: This library allows you to utilize the 12factor inspired DATABASE_URL environment variable to configure your Django application.
+
+- **[Django==4.2.11](https://www.djangoproject.com/)**: Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. It includes built-in features for authentication, URL routing, template engine, and more.
+
+- **[django-allauth==0.57.2](https://pypi.org/project/django-allauth/)**: `django-allauth` is a Django package that provides a set of authentication mechanisms, including social authentication (e.g., OAuth), email confirmation, and account management.
+
+- **[django-crispy-forms==2.1](https://pypi.org/project/django-crispy-forms/)**: Django Crispy Forms allows you to easily build, customize, and control Django forms using CSS classes.
+
+- **[django-extensions==3.2.3](https://pypi.org/project/django-extensions/)**: Django Extensions is a collection of custom extensions for the Django Framework.
+
+- **[django-summernote==0.8.20.0](https://pypi.org/project/django-summernote/)**: Django Summernote is a simple Django application that integrates Summernote, a WYSIWYG editor, into your Django admin interface.
+
+- **[gunicorn==20.1.0](https://pypi.org/project/gunicorn/)**: Gunicorn is a Python WSGI HTTP Server for UNIX. It allows you to run your Django application in a production environment.
+
+- **[oauthlib==3.2.2](https://pypi.org/project/oauthlib/)**: OAuthLib is a Python library for implementing OAuth1 and OAuth2 providers and clients.
+
+- **[psycopg2==2.9.9](https://pypi.org/project/psycopg2/)**: Psycopg is a PostgreSQL adapter for Python. It allows Python code to interact with PostgreSQL databases.
+
+- **[PyJWT==2.8.0](https://pypi.org/project/PyJWT/)**: PyJWT is a Python library that allows you to encode and decode JSON Web Tokens (JWT).
+
+- **[python3-openid==3.2.0](https://pypi.org/project/python3-openid/)**: python3-openid is a Python library for working with OpenID, an open standard for authentication.
+
+- **[requests-oauthlib==1.3.1](https://pypi.org/project/requests-oauthlib/)**: Requests-OAuthlib is an OAuth library for Python Requests.
+
+- **[sqlparse==0.4.4](https://pypi.org/project/sqlparse/)**: SQLParse is a non-validating SQL parser for Python. It provides functions to parse SQL statements and SQL-like syntax.
+
+- **[whitenoise==5.3.0](https://pypi.org/project/whitenoise/)**: WhiteNoise allows your Django application to serve its own static files, making it easy to deploy Django applications on PaaS services like Heroku.
+
+
 ### Standard library imports:
+
+- **django.db**: Provides tools for interacting with the database, including models and querysets.
+- **django.urls**: Handles URL routing and patterns within a Django application.
+- **django.views**: Contains generic views and class-based views for handling HTTP requests.
+- **django.forms**: Provides form handling and validation.
+- **django.contrib**: Contains various contributed modules to Django, such as authentication, admin, sessions, and more.
+- **django.shortcuts**: Offers shortcuts and helper functions for common tasks in Django views.
+- **django.http**: Provides HTTP-related classes and functions, such as request and response objects.
+- **django.template**: Handles template rendering and processing.
 
 ### Other tools:
 
@@ -103,7 +146,7 @@ I've implemented a dream job matching functionality using a function inside the 
 
 ## Resolved bugs
 
-## Debugging the Database
+### Debugging the Database
 
 When originally attempting to run migrations or start the Django server, the following error occured:
 
@@ -166,7 +209,7 @@ Initially, I tried moving database queries into functions within the models.py f
 By experimenting with these different approaches and considering the timing of model initialization, eventually the issues were resolved, leading to a stable and functional database implementation.
 
 
-## Reflection on Project Scope and Agile Development
+### Reflection on Project Scope and Agile Development
 
 After two days of struggling with an error loop, I came to the realization that I needed to further reduce the scope of the project. Initially, my `models.py` file was extensive, aiming to cover a wide range of functionalities and options. However, this ambitious approach led to complexities and difficulties in implementation.
 
@@ -179,14 +222,54 @@ The `models.py` code was refactored to prioritize essential functionalities, foc
 Moving forward, I intend to continue embracing agile principles in my development process, recognizing their role in contributing to the successful and efficient development of applications. This experience has reinforced the importance of adaptability and flexibility in tackling software development challenges.
 
 
+### Debugging Views.py
+
+In the process of fixing issues in `views.py`, I took a step-by-step approach to solve problems that emerged after going back to an earlier version of our code. I reintroduced and rearranged views one at a time to uncover and fix underlying issues, making sure their logic made sense.
+
+This method allowed me to thoroughly examine how views interact with the `Job` object in our Django app. I faced challenges with views relying too much on each other, causing unexpected problems. Additionally, ensuring data flowed smoothly between views and the `Job` object was tricky, especially during job creation and updates.
+
+The main problem I encountered was with creating the dream job object automatically when a user signs up. Without this object, our app couldn't calculate how well other jobs matched the dream job.
+
+#### Challenges Encountered
+1. **Interdependency Errors**: Views relied heavily on each other, causing unexpected issues when making changes.
+   
+2. **Data Integrity**: Ensuring data moved correctly between views and the `Job` object during job creation and updates was tough.
+
+3. **Logic Flow**: Ensuring views followed a logical order, especially when dealing with user sign-up and dream job creation, required careful planning.
+
+#### Solutions Implemented
+1. **Methodical Refactoring**: I carefully reorganized views to reduce their reliance on each other, making the code easier to understand and manage.
+   
+2. **Improved Error Handling**: I made sure our app handled errors gracefully, giving clear feedback to users when things went wrong.
+   
+3. **Optimized Data Access**: I worked on improving how our app accesses data, making sure it was efficient and didn't slow things down.
+   
+4. **Thorough Testing and Validation**: I tested each view extensively to make sure changes didn't cause new problems and everything worked as expected.
+
+
+### Debugging the Match Percentage Calculation
+
+During the development of my Django application for managing job applications, I encountered an issue with the calculation of the match percentage between the user's job applications and their dream job. The problem was that the match percentage for the dream job was consistently showing as 0% instead of the expected 100%.
+
+To address this issue, I carefully examined the calculate_match_percentage() method in the Job model, which is responsible for calculating the match percentage. After thorough debugging, I identified a logic error in the calculation process.
+
+The root cause of the issue was that the total_percentage variable, which accumulates the match percentage for each field, was being incorrectly incremented inside the loop where it should have been outside. As a result, the match percentage for the dream job was only being calculated for fields where the current job's values differed from the dream job's values, leading to an inaccurate result.
+
+To resolve this issue, I adjusted the logic of the calculate_match_percentage() method to correctly calculate the match percentage for each field and then average them outside the loop. By making this adjustment, I ensured that the match percentage for the dream job is accurately calculated as 100%, indicating a perfect match.
+
+After implementing the fix, the match percentage calculation now works as expected, providing users with accurate insights into how closely their job applications align with their dream job criteria.
+
+
 ## Contributors
 
 Dinis Machado
 
 ## Credits
 
+[Bro Code - Python Full Course](https://www.youtube.com/watch?v=XKHEtdqhLK8)
 [Code with Mosh](https://codewithmosh.com)
+Code Institute Django Walkthrough Tutorial Project - access restricted to students
 
 ## Acknowledgments
 
-A special thank you to the Oversight and discussion insight from my Code Institute mentor Juliia Konn
+A special thank you to the oversight and discussion insight from my Code Institute mentor Juliia Konn

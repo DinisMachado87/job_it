@@ -32,5 +32,8 @@
    },
    "[django-html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
+   },
+   "[python]": {
+      "editor.defaultFormatter": "ms-python.autopep8"
    }
 }

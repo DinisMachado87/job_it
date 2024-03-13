@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete_job/<slug:slug>/',
          views.DeleteJobView.as_view(), name='delete_job'),
     path('edit_dream_job/', views.EditDreamJobView.as_view(), name='edit_dream_job'),
+    path('instructions/', views.InstructionsView.as_view(), name='instructions'),
 ]

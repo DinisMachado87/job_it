@@ -109,6 +109,12 @@ CHOICES_status = (
     (5, 'Accepted')
 )
 
+'''
+The Job model is used to store the user's job applications.
+The model includes fields for the user's job criteria
+and a method to calculate the match percentage between the current job
+and the user's dream job.
+'''
 
 class Job(models.Model):
     # User Info
@@ -226,15 +232,25 @@ class Job(models.Model):
 
         if not dream_job:
             # If there's no dream job defined, return 0% match
-            return 0
+            return 100
 
         total_fields = 0
         total_percentage = 0
 
         # Calculate match percentage for each field and accumulate the total
         for field in self._meta.fields:
+            # Skip the fields that are not relevant for comparison
             if field.name not in [
-                    'id', 'user', 'job_to_apply', 'slug', 'is_dream_job', 'status', 'job_description', 'match_percentage']:
+                'id',
+                'user',
+                'job_to_apply',
+                'employer',
+                'slug',
+                'is_dream_job',
+                'status',
+                'job_description',
+                'match_percentage'
+            ]:
                 # Increment the total fields count
                 total_fields += 1
 
@@ -244,19 +260,31 @@ class Job(models.Model):
 
                 # Skip comparison for 'Not applicable' options
                 if dream_value == 0 or current_value == 0:
+                    # Subtract 1 from total_fields
+                    total_fields -= 1
                     continue
 
                 if dream_value == current_value:
                     field_percentage = 100  # Field values match exactly
                 else:
 
-                    # Calculate the percentage difference
-                    # between the current job and the dream job
-                    field_percentage = 100 - abs(dream_value - current_value)
-                    # Ensure percentage doesn't go negative
-                    field_percentage = max(field_percentage, 0)
+                    '''
+                    Calculate the maximum value between the dream job's 
+                    value and the current job's value
+                    '''
+                    max_value = max(dream_value, current_value)
 
-                # Accumulate the percentage difference to the total percentage
+                    # Calculate the percentage difference from the maximum value
+                    percentage_difference = abs(
+                        dream_value - current_value) / max_value
+
+                    '''
+                    Subtract the percentage difference 
+                    from 100 to get the match percentage
+                    '''
+                    field_percentage = 100 - percentage_difference * 100
+
+                # Accumulate the match percentage to the total percentage
                 total_percentage += field_percentage
 
         if total_fields > 0:
@@ -268,7 +296,11 @@ class Job(models.Model):
 
         return match_percentage
 
-    # Save the match percentage to the database
+    # Save the match percentage when saving the job object
+    def save(self):
+        self.match_percentage = self.calculate_match_percentage()
+        super().save()
+
     class Meta:
         ordering = ['-match_percentage']
 
