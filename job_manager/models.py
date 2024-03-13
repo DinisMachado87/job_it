@@ -297,9 +297,9 @@ class Job(models.Model):
         return match_percentage
 
     # Save the match percentage when saving the job object
-    def save(self):
+    def save(self, *args, **kwargs):
         self.match_percentage = self.calculate_match_percentage()
-        super().save()
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-match_percentage']

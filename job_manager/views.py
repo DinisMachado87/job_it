@@ -24,7 +24,7 @@ class JobListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Job.objects.filter(user=self.request.user)
 # Overriding the default get method to check if the user has a Dream Job object
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         user_id = request.user.id
         dream_job_slug = f'dream_job_{user_id}'
         if not self.request.user.user_jobs.filter(slug=dream_job_slug).exists():
@@ -45,11 +45,11 @@ class JobListView(LoginRequiredMixin, generic.ListView):
 
 class AddJobView(LoginRequiredMixin, View):
     # Create a new job to apply form
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = JobForm()
         return render(request, 'job_manager/add_job.html', {'form': form})
     # Save the new job to apply object
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         form = JobForm(request.POST)
         if form.is_valid():
             # Prepopulates id hidden fields
@@ -67,13 +67,13 @@ class AddJobView(LoginRequiredMixin, View):
 
 class EditJobView(LoginRequiredMixin, View):
     # Edit an existing job to apply form
-    def get(self, request, slug):
+    def get(self, request, slug, *args, **kwargs):
         # Retrieve the job to edit using the slug and the user
         job = get_object_or_404(Job, slug=slug, user=request.user)
         form = JobForm(instance=job)
         return render(request, 'job_manager/add_job.html', {'form': form})
 
-    def post(self, request, slug):
+    def post(self, request, slug, *args, **kwargs):
         # Save the edited job to apply object
         job = get_object_or_404(Job, slug=slug, user=request.user)
         form = JobForm(request.POST, instance=job)
@@ -92,12 +92,12 @@ class EditJobView(LoginRequiredMixin, View):
 
 class DeleteJobView(LoginRequiredMixin, View):
     # Delete a job to apply object
-    def get(self, request, slug):
+    def get(self, request, slug, *args, **kwargs):
         # Retrieve the job to delete using the slug and the user
         job = get_object_or_404(Job, slug=slug, user=request.user)
         return render(request, 'job_manager/delete_job.html', {'job': job})
     # Confirm the deletion of the job to apply object
-    def post(self, request, slug):
+    def post(self, request, slug, *args, **kwargs):
         # Delete the job to apply object
         job = get_object_or_404(Job, slug=slug, user=request.user)
         job.delete()
@@ -122,7 +122,7 @@ where the method calculate_match_percentage is defined.
 
 class EditDreamJobView(LoginRequiredMixin, View):
     # Edit the user's dream job form
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         # Retrieve the user's dream job using the slug and the user
         user_id = request.user.id
         dream_job_slug = f'dream_job_{user_id}'
@@ -133,7 +133,7 @@ class EditDreamJobView(LoginRequiredMixin, View):
         return render(
             request, 'job_manager/create_dream_job.html', {'form': form})
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         # Save the user's dream job object
         # Retrieve the user's dream job using the slug and the user
         user_id = request.user.id
