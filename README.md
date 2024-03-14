@@ -8,6 +8,38 @@ README
 
 The Job Search Management App is a web application designed to help users manage their job search process effectively. It allows users to set up their dream job preferences, track job applications, visualize job matches, and manage application statuses. The app provides a user-friendly interface for organizing and optimizing the job search process, helping users find jobs that best match their preferences.
 
+
+## Features
+
+### 1. Job Management
+- **Add, Edit, and Delete Jobs:** Easily add new job applications, edit existing ones, or remove outdated entries.
+- **Dream Job Criteria:** Define your dream job criteria to compare and evaluate potential job opportunities.
+
+### 2. User Authentication
+- **Secure User Authentication:** Users can register, log in, and log out securely to manage their job applications.
+- **Personalized Experience:** Each user has their own profile and job dashboard for personalized management.
+
+### 3. Match Percentage Calculation
+- **Match Percentage:** Automatically calculates the match percentage between each job application and your defined dream job criteria.
+- **Ranking:** Jobs are ranked based on how closely they match your dream job, helping you prioritize your applications.
+
+### 4. Responsive Design
+- **Mobile-Friendly:** Responsive design ensures a seamless experience across various devices, including smartphones, tablets, and desktops.
+- **Optimized UI:** Intuitive user interface for easy navigation and interaction, enhancing usability on all screen sizes.
+
+### 5. Instructional Guidance
+- **Instructions Section:** Access helpful instructions and guidance on how to use the application effectively.
+- **Onboarding Support:** New users receive onboarding assistance to quickly get started with job management.
+
+### 6. Customization Options
+- **Personal Preferences:** Customize your job dashboard and settings to suit your preferences and workflow.
+- **Flexible Configuration:** Easily adjust dream job criteria and application preferences to reflect changing priorities.
+
+### 7. Secure Data Management
+- **Data Privacy:** Ensures the privacy and security of user data through robust encryption and access controls.
+- **Data Backup:** Regularly backs up user data to prevent loss and ensure continuity of service.
+
+
 ## User Stories
 
 #### Create Dream Job Preferences Profile:
@@ -26,17 +58,13 @@ As a user, I can add job profiles to my profile to track jobs I want to apply to
 
 - AC2: I can specify criteria for each job profile, matching those of my dream job preferences.
 
-#### Automatically Update Dream Job Preferences:
+#### Access Job Management Board:
 
-As a user, I want my dream job preference choices to be automatically updated when I add a new option with a new job profile so that my preferences stay up-to-date.
+As a user, I have access to a job management board to help with managing job application status.
 
-- AC1: Whenever I add a new job profile, I am prompted to review and update my dream job preferences if needed.
+- AC1: I can track the status of each job application (e.g., applied, interview scheduled, rejected) on a centralized board.
 
-#### Customize Job Profile Criteria Fields:
-
-As a user, I can customize job profile criteria fields to tailor them to specific job requirements.
-
-- AC1: I can add custom fields such as specific skills, certifications, or preferences related to the job.
+- AC2: I can update the status of each job application as it progresses through the hiring process.
 
 #### View Job Ratings and Visualization:
 
@@ -46,36 +74,23 @@ As a user, I can view an overall automatic rating for each job profile and visua
 
 - AC2: The job rating is displayed in a chart along with other relevant information about each job.
 
-#### Choose Number of Top Matching Jobs:
-
-As a user, I can choose how many of the top matching jobs I want to see in the chart for better visualization and comparison.
-
-- AC1: I can specify the number of top matching jobs to be displayed in the chart settings.
-
-#### Select Main Criteria for Job Matching Chart:
-
-As a user, I can choose the main criteria of the jobs to be visible in the header of the job matching chart for easier comparison.
-
-- AC1: I can select the criteria such as salary range, commuting distance, work-from-home option, etc., to be displayed in the chart header.
-
-#### Access Job Management Board:
-
-As a user, I have access to a job management board to help with managing job application status.
-
-- AC1: I can track the status of each job application (e.g., applied, interview scheduled, rejected) on a centralized board.
-
-- AC2: I can update the status of each job application as it progresses through the hiring process.
-
-#### Automatically Calculate Commute Distance:
-
-As a user, I want the commute distance to be automatically calculated for each job profile to make informed decisions.
-
-- AC1: The commuting distance is calculated based on the job location and my preferred mode of transportation.
-
 
 ## Languages:
 
-### Dependencies
+- **Python:** Utilized for backend development, including data modeling, business logic, and API endpoints.
+
+- **HTML/CSS:** Used for structuring and styling the frontend user interface to ensure a visually appealing experience.
+
+### Frameworks and Libraries:
+- **Django:** A high-level Python web framework used for rapid development, providing robust features for building web applications efficiently.
+
+- **Bootstrap:** Utilized for frontend development to create responsive, mobile-first designs with pre-built components and styling.
+
+- **jQuery:** Leveraged for simplified DOM manipulation and event handling to enhance user interactions and dynamic content loading.
+
+- **Django Crispy Forms:** Integrated to easily render Django forms in a visually appealing and consistent manner, enhancing form usability.
+
+- **Django Rest Framework:** Employed to create RESTful APIs in Django, facilitating seamless communication between the frontend and backend components.
 
 ## Dependencies
 
@@ -123,10 +138,13 @@ As a user, I want the commute distance to be automatically calculated for each j
 
 ### Other tools:
 
-[VSCode](https://code.visualstudio.com/) was used as the main tool to write and edit code.
+[VSCode:](https://code.visualstudio.com/) was used as the main tool to write and edit code.
 
-[GitHub](https://github.com/) was used to host the code of the website.
+[GitHub:](https://github.com/) was used to host the code of the website.
 
+[Heroku:](https://id.heroku.com/login) Utilized for deployment and hosting of the web application, providing a scalable platform with integrated continuous delivery and deployment features.
+
+[ElephantSQL: ](https://www.elephantsql.com/) Employed as the PostgreSQL database hosting service, offering a managed cloud database solution for storing and managing application data efficiently.
 
 ## Functionality
 
@@ -266,8 +284,18 @@ Dinis Machado
 
 ## Credits
 
+The header and footer in the project are a modified version of the Code institute Django Walkthrough.
+
+## Resources
+
+[Bootstrap5 documentation](https://getbootstrap.com/)
+
+[Django documentation](https://docs.djangoproject.com/en/5.0/)
+
 [Bro Code - Python Full Course](https://www.youtube.com/watch?v=XKHEtdqhLK8)
+
 [Code with Mosh](https://codewithmosh.com)
+
 Code Institute Django Walkthrough Tutorial Project - access restricted to students
 
 ## Acknowledgments

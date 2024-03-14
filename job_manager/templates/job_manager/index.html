@@ -4,7 +4,7 @@
 <!-- index.html content starts here -->
 <div class="container-xxl">
     <div>
-        <h1 class="invisible">Dream Job chart</h1>
+        <h1 class="text-warning mt-5 text-center fs-3">Your jobs chart</h1>
         <!-- Header Row -->
         <div class="container-fluid ">
             <div class="job-info text-danger rounded-pill row t thdr">
@@ -30,7 +30,7 @@
                 <div class="col">
                     <p></p>
                 </div>
-                <div>
+                <div class="col">
                     <p></p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
         <!-- Data Rows -->
         <div class="container-fluid">
             {% for job in object_list %}
-            <div class="job-info pblue rounded-pill row d-flex trow">
+            <div class="{% if job.is_dream_job %}border border-warning-5{% endif %} job-info pblue rounded-pill row d-flex trow">
                 <div class="col text-danger"><p>{{ job.match_percentage }} %</p></div>
                 <div class="col"><p>{{ job.get_status_display }}</p></div>
                 <div class="col"><p><strong>{{ job.job_to_apply }}</strong></p></div>

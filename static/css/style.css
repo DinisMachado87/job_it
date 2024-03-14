@@ -1,5 +1,6 @@
 body {
     background-color: #6610f2;
+    overflow-x: hidden;
 }
 
 .pblue {

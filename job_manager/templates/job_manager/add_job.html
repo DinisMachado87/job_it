@@ -5,7 +5,7 @@
     <div class="container p-5">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10 mt-3 pblue rounded-3 p-3">
-                <h2>Edit Your Dream Job Criteria</h2>
+                <h1 class="text-warning fs-4">Add Job</h1>
                 <form method="post">
                     {% csrf_token %}
                     {% for field in form %}
@@ -18,11 +18,12 @@
                         {% endif %}
                     {% endfor %}
                     <!-- Hidden inputs for required fields with default values -->
-                    <input type="hidden" name="slug" value="dream-job">
-                    <input type="hidden" name="is_dream_job" value="True">
+                    <input type="hidden" name="slug" value="new-job">
+                    <input type="hidden" name="is_dream_job" value="False">
                     <input type="hidden" name="match_percentage" value="0">
                     <input type="hidden" name="user" value="{{ request.user.id }}">
-                    <input class="btn btn-dark" type="submit" value="Submit">
+                    <a class="btn btn-secondary" href="{% url 'home' %}">Cancel</a>
+                    <input class="btn btn-dark" type="submit" value="Add">
                 </form>
             </div>
         </div>

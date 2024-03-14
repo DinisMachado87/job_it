@@ -109,14 +109,14 @@ CHOICES_status = (
     (5, 'Accepted')
 )
 
-'''
-The Job model is used to store the user's job applications.
-The model includes fields for the user's job criteria
-and a method to calculate the match percentage between the current job
-and the user's dream job.
-'''
 
 class Job(models.Model):
+    '''
+    The Job model is used to store the user's job applications.
+    The model includes fields for the user's job criteria
+    and a method to calculate the match percentage between the current job
+    and the user's dream job.
+    '''
     # User Info
     user = models.ForeignKey(
         User,
@@ -212,20 +212,19 @@ class Job(models.Model):
     # Match percentage
     match_percentage = models.IntegerField(default=0)
 
-    '''
-    Calculate the match percentage between the current job and the dream job.
-
-    The match percentage is calculated by comparing the current job 
-    with the dream job 
-    and calculating the percentage difference between each field. 
-    The average percentage difference across all fields 
-    is then calculated to determine the overall match percentage.
-
-    The match percentage is used to rank the job applications based 
-    on how closely they match the user's dream job criteria.
-    '''
-
     def calculate_match_percentage(self):
+        '''
+        Calculate the match percentage between the current job and the dream job.
+
+        The match percentage is calculated by comparing the current job 
+        with the dream job 
+        and calculating the percentage difference between each field. 
+        The average percentage difference across all fields 
+        is then calculated to determine the overall match percentage.
+
+        The match percentage is used to rank the job applications based 
+        on how closely they match the user's dream job criteria.
+        '''
         # Retrieve the dream job for this user
         dream_job = Job.objects.filter(
             user=self.user, is_dream_job=True).first()
@@ -296,13 +295,15 @@ class Job(models.Model):
 
         return match_percentage
 
-    # Save the match percentage when saving the job object
     def save(self, *args, **kwargs):
+        # Save the match percentage when saving th e job object
         self.match_percentage = self.calculate_match_percentage()
         super().save(*args, **kwargs)
 
     class Meta:
+        # Order the job applications by match percentage
         ordering = ['-match_percentage']
 
     def __str__(self):
+        # set the job_to_apply as the string representation of the job object
         return self.job_to_apply

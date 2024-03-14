@@ -2,12 +2,27 @@ from django.contrib import admin
 from .models import Job
 from django_summernote.admin import SummernoteModelAdmin
 
-# Register your models here.
 
-# admin.site.register(Job)
 @admin.register(Job)
 class JobAdmin(SummernoteModelAdmin):
-    list_display = ('job_to_apply', 'pay', 'status', 'freelance_hire', 'responsibility', 'schedule_type', 'company_size', 'office_type')
+    '''
+    Job admin class to register the Job model
+    - define the fields to be displayed in the admin panel
+    - define the job description field to be used for searching
+    - define the fields to be used for filtering
+    - define the prepopulating reference for the slug field
+    '''
+    list_display = (
+        'user',
+        'job_to_apply',
+        'pay',
+        'status',
+        'freelance_hire',
+        'responsibility',
+        'schedule_type',
+        'company_size',
+        'office_type'
+        )
     search_fields = ['job_description']
     list_filter = (
         'user', 
