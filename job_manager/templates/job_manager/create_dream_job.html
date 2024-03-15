@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10 mt-3 pblue rounded-3 p-3">
                 <h1 class="fs-4 text-warning">Edit Your Dream Job Criteria</h1>
-                <form method="post">
+                <form method="post" aria-label="Edit Dream Job Criteria Form">
                     {% csrf_token %}
                     {% for field in form %}
                         {% if field.name != 'job_to_apply' and field.name != 'employer' and field.name != 'job_description' and field.name != 'user' and field.name != 'is_dream_job' and field.name != 'slug' %}
@@ -24,8 +24,8 @@
                     <input type="hidden" name="slug" value="dream-job">
                     <input type="hidden" name="is_dream_job" value="True">
                     <input type="hidden" name="user" value="{{ request.user.id }}">
-                    <a class="btn btn-secondary" href="{% url 'home' %}">Cancel</a>
-                    <input class="btn btn-dark" type="submit" value="Edit">
+                    <a class="btn btn-secondary" href="{% url 'home' %}" aria-label="Cancel Editing">Cancel</a>
+                    <input class="btn btn-dark" type="submit" value="Edit" aria-label="Submit Editing">                    
                 </form>
             </div>
         </div>

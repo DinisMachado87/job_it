@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10 mt-3 pblue rounded-3 p-3">
                 <h1 class="text-warning fs-4">Edit Job</h1>
-                <form method="post">
+                <form method="post" aria-label="Edit Job Form">
                     {% csrf_token %}
                     {% for field in form %}
                         {% if field.name != 'user' and field.name != 'slug' and field.name != 'is_dream_job' and field.name != 'match_percentage' %}
@@ -22,8 +22,8 @@
                     <input type="hidden" name="is_dream_job" value="False">
                     <input type="hidden" name="match_percentage" value="0">
                     <input type="hidden" name="user" value="{{ request.user.id }}">
-                    <a class="btn btn-secondary" href="{% url 'home' %}">Cancel</a>
-                    <input class="btn btn-dark" type="submit" value="Edit">
+                    <a class="btn btn-secondary" href="{% url 'home' %}" aria-label="Cancel">Cancel</a>
+                    <input class="btn btn-dark" type="submit" value="Edit" aria-label="Edit Job">                    
                 </form>
             </div>
         </div>

@@ -7,7 +7,7 @@
         <h1 class="text-warning mt-5 text-center fs-3">Your jobs chart</h1>
         <!-- Header Row -->
         <div class="container-fluid ">
-            <div class="job-info text-danger rounded-pill row t thdr">
+            <div class="job-info text-danger rounded-pill row t thdr" aria-label="Job Information Header">
                 <div class="col text-warning"><p>Match %</p></div>
                 <div class="col"><p>Status</p></div>
                 <div class="col"><p>Job</p></div>
@@ -38,7 +38,7 @@
         <!-- Data Rows -->
         <div class="container-fluid">
             {% for job in object_list %}
-            <div class="{% if job.is_dream_job %}border border-warning-5{% endif %} job-info pblue rounded-pill row d-flex trow">
+            <div class="{% if job.is_dream_job %}border border-warning-5{% endif %} job-info pblue rounded-pill row d-flex trow" aria-label="Job Information Row">
                 <div class="col text-danger"><p>{{ job.match_percentage }} %</p></div>
                 <div class="col"><p>{{ job.get_status_display }}</p></div>
                 <div class="col"><p><strong>{{ job.job_to_apply }}</strong></p></div>
@@ -80,16 +80,16 @@
     <div class="container-xl mt-4">
         <div class="row justify-content-center">
             {% if is_paginated %}
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
+            <nav aria-label="Pagination Navigation">
+                <ul class="pagination justify-content-center" aria-label="Page Navigation">
                     {% if page_obj.has_previous %}
-                    <li><a class="btn btn-dark rounded-pill" href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+                        <li><a class="btn btn-dark rounded-pill" href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
                     {% endif %}
                     {% if page_obj.has_next %}
-                    <li><a class="btn btn-dark rounded-pill" href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                        <li><a class="btn btn-dark rounded-pill" href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
                     {% endif %}
                 </ul>
-            </nav>
+            </nav>            
             {% endif %}
         </div>
     </div>

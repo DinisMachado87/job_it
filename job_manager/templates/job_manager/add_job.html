@@ -12,6 +12,7 @@
                         {% if field.name != 'user' and field.name != 'slug' and field.name != 'is_dream_job' and field.name != 'match_percentage' %}
                             <div class="row">
                                 <div class="col">
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                     {{ field | as_crispy_field }}
                                 </div>
                             </div>
@@ -22,8 +23,8 @@
                     <input type="hidden" name="is_dream_job" value="False">
                     <input type="hidden" name="match_percentage" value="0">
                     <input type="hidden" name="user" value="{{ request.user.id }}">
-                    <a class="btn btn-secondary" href="{% url 'home' %}">Cancel</a>
-                    <input class="btn btn-dark" type="submit" value="Add">
+                    <a class="btn btn-secondary" href="{% url 'home' %}" aria-label="Cancel">Cancel</a>
+                    <input class="btn btn-dark" type="submit" value="Add" aria-label="Add Job">
                 </form>
             </div>
         </div>
