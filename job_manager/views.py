@@ -11,23 +11,26 @@ from .forms import JobForm
 class JobListView(LoginRequiredMixin, generic.ListView):
     '''
     Index view
-    Checks if the user has a Dream Job object, 
-    if not, creates one before rendering the index page 
+    Checks if the user has a Dream Job object,
+    if not, creates one before rendering the index page
     to make sure there are no errors when views search for the Dream Job slug.
-    The Dream jog slug is created using the user's id 
+    The Dream jog slug is created using the user's id
     and the string 'dream_job_' for uniqueness.
     '''
     template_name = 'job_manager/index.html'
     paginate_by = 5
+
     def get_queryset(self):
-    # Filtering the queryset to only show the user's jobs
+        # Filtering the queryset to only show the user's jobs
         return Job.objects.filter(user=self.request.user)
+
     def get(self, request, *args, **kwargs):
-        # Overriding the default get method 
+        # Overriding the default get method
         # to check if the user has a Dream Job object
         user_id = request.user.id
         dream_job_slug = f'dream_job_{user_id}'
-        if not self.request.user.user_jobs.filter(slug=dream_job_slug).exists():
+        if not self.request.user.user_jobs.filter(
+                slug=dream_job_slug).exists():
             # If user doesn't have a Dream Job object, create one
             Job.objects.create(
                 user=request.user,
@@ -55,12 +58,13 @@ class AddJobView(LoginRequiredMixin, View):
     can be found in the model
     where the method calculate_match_percentage is defined.
     '''
-    # Create a new job to apply form
     def get(self, request, *args, **kwargs):
+        # Create a new job to apply form
         form = JobForm()
         return render(request, 'job_manager/add_job.html', {'form': form})
-    # Save the new job to apply object
+
     def post(self, request, *args, **kwargs):
+        # Save the new job to apply object
         form = JobForm(request.POST)
         if form.is_valid():
             # Prepopulates id hidden fields
@@ -84,7 +88,7 @@ class EditJobView(LoginRequiredMixin, View):
     The view also saves the edited job to apply object
     and recalculates the match percentage of the job
     in relation to the updated job fields.
-    More details about the match percentage calculation 
+    More details about the match percentage calculation
     can be found in the model
     where the method calculate_match_percentage is defined.
     '''
@@ -107,7 +111,7 @@ class EditJobView(LoginRequiredMixin, View):
             job.match_percentage = job.calculate_match_percentage()
             job.save()
             return redirect('home')
-        # If the form is not valid, render the form with the errors
+            # If the form is not valid, render the form with the errors
         return render(request, 'job_manager/edit_job.html', {'form': form})
 
 
@@ -116,15 +120,16 @@ class DeleteJobView(LoginRequiredMixin, View):
     DeleteJobView is a view that allows the user to delete a job to apply.
     The view retrieves the job to delete using the slug and the user
     and renders the confirmation form with the job to delete.
-    The view also deletes the job to apply object 
+    The view also deletes the job to apply object
     and redirects the user to the index page.
     '''
     def get(self, request, slug, *args, **kwargs):
         # Retrieve the job to delete using the slug and the user
         job = get_object_or_404(Job, slug=slug, user=request.user)
         return render(request, 'job_manager/delete_job.html', {'job': job})
+
     def post(self, request, slug, *args, **kwargs):
-    # Confirm the deletion of the job to apply object
+        # Confirm the deletion of the job to apply object
         job = get_object_or_404(Job, slug=slug, user=request.user)
         job.delete()
         # Delete the job to apply object
@@ -133,18 +138,18 @@ class DeleteJobView(LoginRequiredMixin, View):
 
 class EditDreamJobView(LoginRequiredMixin, View):
     '''
-    EditDreamJobView is called automatically one first time 
+    EditDreamJobView is called automatically one first time
     after the user is created
-    to initiate a dream job object avoiding errors when the user tries to access 
-    the index page.
+    to initiate a dream job object avoiding errors
+    when the user tries to access the index page.
 
     EditDreamJobView is a view that allows the user to edit their dream job.
-    The view retrieves the user's dream job using the slug and the user 
+    The view retrieves the user's dream job using the slug and the user
     and renders the form with the user's dream job.
-    The view also saves the user's dream job object 
+    The view also saves the user's dream job object
     and recalculates the match percentage of all the user's jobs
     in relation to the updated dream job fields.
-    More details about the match percentage 
+    More details about the match percentage
     calculation can be found in the model
     where the method calculate_match_percentage is defined.
     '''
@@ -180,8 +185,10 @@ class EditDreamJobView(LoginRequiredMixin, View):
             job.match_percentage = 100
             job.save()
             for job in Job.objects.filter(
+                    user=self.request.user,
+                    is_dream_job=False
+                    ):
                 # Calculate the match percentage for all the user's jobs
-                user=self.request.user, is_dream_job=False):
                 job.match_percentage = job.calculate_match_percentage()
                 job.save()
             return redirect('home')

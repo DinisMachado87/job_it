@@ -214,15 +214,16 @@ class Job(models.Model):
 
     def calculate_match_percentage(self):
         '''
-        Calculate the match percentage between the current job and the dream job.
+        Calculate the match percentage between the current job
+        and the dream job.
 
-        The match percentage is calculated by comparing the current job 
-        with the dream job 
-        and calculating the percentage difference between each field. 
-        The average percentage difference across all fields 
+        The match percentage is calculated by comparing the current job
+        with the dream job
+        and calculating the percentage difference between each field.
+        The average percentage difference across all fields
         is then calculated to determine the overall match percentage.
 
-        The match percentage is used to rank the job applications based 
+        The match percentage is used to rank the job applications based
         on how closely they match the user's dream job criteria.
         '''
         # Retrieve the dream job for this user
@@ -253,7 +254,7 @@ class Job(models.Model):
                 # Increment the total fields count
                 total_fields += 1
 
-                # Get the corresponding values for the current job and the dream job
+                # Get the values for the current job and the dream job
                 dream_value = getattr(dream_job, field.name)
                 current_value = getattr(self, field.name)
 
@@ -268,17 +269,17 @@ class Job(models.Model):
                 else:
 
                     '''
-                    Calculate the maximum value between the dream job's 
+                    Calculate the maximum value between the dream job's
                     value and the current job's value
                     '''
                     max_value = max(dream_value, current_value)
 
-                    # Calculate the percentage difference from the maximum value
+                    # Calculate the percent difference from the maximum value
                     percentage_difference = abs(
                         dream_value - current_value) / max_value
 
                     '''
-                    Subtract the percentage difference 
+                    Subtract the percentage difference
                     from 100 to get the match percentage
                     '''
                     field_percentage = 100 - percentage_difference * 100

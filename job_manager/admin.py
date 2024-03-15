@@ -25,16 +25,16 @@ class JobAdmin(SummernoteModelAdmin):
         )
     search_fields = ['job_description']
     list_filter = (
-        'user', 
-        'freelance_hire', 
-        'responsibility', 
-        'schedule_type', 
-        'company_size', 
-        'bring_pet', 
-        'own_computer', 
-        'office_type', 
-        'pet_sitter', 
-        'child_care', 
+        'user',
+        'freelance_hire',
+        'responsibility',
+        'schedule_type',
+        'company_size',
+        'bring_pet',
+        'own_computer',
+        'office_type',
+        'pet_sitter',
+        'child_care',
         'status'
         )
-    prepopulated_fields = {'slug': ('job_to_apply','employer'),}
+    prepopulated_fields = {'slug': ('job_to_apply', 'employer'), }

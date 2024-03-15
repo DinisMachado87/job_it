@@ -1,46 +1,107 @@
-README
-# Job it. 
+![Job it - Presentation image](documentation/main.png)
+
+# Job it. | README
  Job Search Management app
 
-*The link to [Job it.](https://jobit-e6faad3e8aa6.herokuapp.com/)*
+*The link to the deployed site [Job it.](https://jobit-e6faad3e8aa6.herokuapp.com/)*
 
 ## Overview
 
 The Job Search Management App is a web application designed to help users manage their job search process effectively. It allows users to set up their dream job preferences, track job applications, visualize job matches, and manage application statuses. The app provides a user-friendly interface for organizing and optimizing the job search process, helping users find jobs that best match their preferences.
 
-
 ## Features
+
 
 ### 1. Job Management
 - **Add, Edit, and Delete Jobs:** Easily add new job applications, edit existing ones, or remove outdated entries.
 - **Dream Job Criteria:** Define your dream job criteria to compare and evaluate potential job opportunities.
 
+![Add job Screenshot](documentation/add_job.png)
+![Edit job Screenshot](documentation/edit_job.png)
+![Delete Screenshot](documentation/delete.png)
+
 ### 2. User Authentication
 - **Secure User Authentication:** Users can register, log in, and log out securely to manage their job applications.
 - **Personalized Experience:** Each user has their own profile and job dashboard for personalized management.
+
+![Create Account Screenshot](documentation/create-account.png)
 
 ### 3. Match Percentage Calculation
 - **Match Percentage:** Automatically calculates the match percentage between each job application and your defined dream job criteria.
 - **Ranking:** Jobs are ranked based on how closely they match your dream job, helping you prioritize your applications.
 
+![Index Screenshot](documentation/index.png)
+
 ### 4. Responsive Design
 - **Mobile-Friendly:** Responsive design ensures a seamless experience across various devices, including smartphones, tablets, and desktops.
 - **Optimized UI:** Intuitive user interface for easy navigation and interaction, enhancing usability on all screen sizes.
+
 
 ### 5. Instructional Guidance
 - **Instructions Section:** Access helpful instructions and guidance on how to use the application effectively.
 - **Onboarding Support:** New users receive onboarding assistance to quickly get started with job management.
 
-### 6. Customization Options
-- **Personal Preferences:** Customize your job dashboard and settings to suit your preferences and workflow.
-- **Flexible Configuration:** Easily adjust dream job criteria and application preferences to reflect changing priorities.
+![Instructions Screenshot](documentation/instructions.png)
+
+### 6. Edit Dream Job
+- **Flexible Configuration:** Easily adjust dream job criteria to reflect changing priorities.
+
+![Edit Dream Job Screenshot](documentation/edit_dream_job.png)
 
 ### 7. Secure Data Management
 - **Data Privacy:** Ensures the privacy and security of user data through robust encryption and access controls.
 - **Data Backup:** Regularly backs up user data to prevent loss and ensure continuity of service.
 
 
-## User Stories
+## How to Use
+
+### 1. Adding a New Job to apply
+
+To add a new job that you intend to apply for, follow these steps:
+
+1. Navigate to the "Add Job" page by clicking on the "Add Job" button on the homepage or by visiting the URL `/add_job/`.
+2. Fill out the form with the details of the job to apply, such as job title, employer, job description, etc.
+3. Click the "Add" button to submit the form.
+4. The job will be added, and you will be redirected to the homepage where you can see the list of all your job applications.
+
+### 2. Editing Job  to apply Details
+
+If you need to edit the details of a job  to apply, follow these steps:
+
+1. Navigate to the "Edit Job" page by clicking on the "Edit" button next to the job you want to edit on the homepage.
+2. Update the necessary fields in the form.
+3. Click the "Edit" button to save your changes.
+4. The job details will be updated, and you will be redirected to the homepage.
+
+### 3. Deleting a Job to apply
+
+To delete a job application, follow these steps:
+
+1. Navigate to the "Delete" Job page by clicking on the "Delete" button next to the job you want to delete.
+2. Confirm the deletion by clicking the "Delete" button.
+3. The job will be permanently deleted, and you will be redirected to the homepage.
+
+### 4. Editing Dream Job Criteria
+
+To edit your dream job criteria, follow these steps:
+
+1. Navigate to the "Edit Dream Job Criteria" page by clicking on the "Edit Dream Job Criteria" button on the homepage.
+2. Fill out the form with your desired dream job criteria.
+3. Click the "Edit" button to save your changes.
+4. Your dream job criteria will be updated, and you will be redirected to the homepage.
+
+### 5. Viewing Instructions
+
+If you need guidance on how to use the application, you can view the instructions by following these steps:
+
+1. Navigate to the "Instructions" page by clicking on the "Instructions" button on the homepage.
+2. Read through the instructions provided.
+
+## Development User Stories
+
+![User stories](documentation/user_stories/user_stories_board.png)
+
+![User Story Example](documentation/user_stories/user_story.png)
 
 #### Create Dream Job Preferences Profile:
 
@@ -161,6 +222,53 @@ I've implemented a dream job matching functionality using a function inside the 
 - **Match Percentage Calculation**: I implemented a method `calculate_match_percentage()` within the `Job` model. This method calculates the match percentage between a job application and the users dream job. It compares each field of the job application with the corresponding field of the dream job, calculates the percentage difference, and then averages these percentages to determine the overall match percentage.
 
 - **Sorting Jobs**: I implemented a Django Meta class to specify the ordering of job applications based on their match percentage. Jobs with higher match percentages are ranked higher in the list, showing the user the most matching overall job applications to prioritise.
+
+## Deployment
+
+1. Clone the repository to your local machine.
+2. Install dependencies using pip install -r requirements.txt.
+3. Set up your environment variables, including database credentials and Django secret key.
+4. Create a new PostgreSQL database on ElephantSQL and obtain the database URL.
+5. Configure Django settings to use the PostgreSQL database URL.
+6. Run migrations using python manage.py migrate.
+7. Create a superuser account using python manage.py createsuperuser.
+8. Run the development server using python manage.py runserver.
+9. Access the Django admin interface to manage user profiles and job applications.
+10. Use Django shell to test model functions and logic without the need for frontend.
+11. Ensure proper handling of sensitive information such as passwords and database credentials.
+12. Follow best practices for Django project structure, including separating settings into different files and using environment variables.
+
+## Manual Testing
+
+
+| Test Case Description                                       | Expected Outcome                                    | Pass/Fail |
+|-------------------------------------------------------------|-----------------------------------------------------|-----------|
+| Access the homepage (`/`)                                   | Homepage with a list of jobs to apply displayed    |    Pass   |
+| Access the add job page (`/add_job/`)                      | Form to add a new job to apply displayed           |    Pass   |
+| Submit a new job to apply form                              | Job to apply added and displayed on the homepage    |    Pass   |
+| Access the edit job page for an existing job (`/edit_job/<slug>/`) | Form to edit the selected job to apply displayed  |    Pass   |
+| Submit the edit job to apply form                           | Job to apply edited and changes reflected           |    Pass   |
+| Access the delete job confirmation page for an existing job (`/delete_job/<slug>/`) | Confirmation page to delete the selected job displayed |    Pass   |
+| Confirm the deletion of the job to apply                    | Job to apply deleted and removed from the list      |    Pass   |
+| Access the edit dream job criteria page (`/edit_dream_job/`) | Form to edit dream job criteria displayed          |    Pass   |
+| Submit the edit dream job criteria form                     | Dream job criteria updated and changes reflected    |    Pass   |
+| Access the instructions page (`/instructions/`)            | Instructions for using the application displayed    |    Pass   |
+| Verify all links on the homepage are functional            | Clicking each link takes you to the expected page   |    Pass   |
+| Verify all form fields on each page are functional         | Input validation works as expected                  |    Pass   |
+| Submit forms with invalid data                              | Appropriate error messages displayed                |    Pass   |
+| Check responsiveness of each page                           | Pages display properly on different screen sizes    |    Pass   |
+| Add multiple jobs to apply                                  | All jobs to apply are displayed and functional      |    Pass   |
+| Pagination is happening when more than 5 jobs               | Pagination links show up when 5 jobs or more |    Pass   |
+| Test pagination functionality on the homepage               | Pagination links navigate through pages correctly   |    Pass   |
+| Edit dream job criteria with different values               | Changes in dream job criteria reflected correctly   |    Pass   |
+| Edit job details with various scenarios                     | Changes in job details reflected correctly          |    Pass   |
+| Delete multiple jobs to apply                               | Deleted jobs to apply are removed from the list     |    Pass   |
+| Test the search functionality with different keywords       | Relevant jobs to apply are displayed                |    Pass   |
+| Test filtering functionality with different criteria        | Jobs to apply are filtered correctly                |    Pass   |
+| Test sorting functionality with different parameters        | Jobs to apply are sorted correctly                  |    Pass   |
+| Test for any security vulnerabilities                       | No unauthorized access or data breaches             |    Pass   |
+| Test for browser compatibility                              | Application functions correctly on major browsers   |    Pass   |
+
 
 ## Resolved bugs
 
@@ -301,3 +409,25 @@ Code Institute Django Walkthrough Tutorial Project - access restricted to studen
 ## Acknowledgments
 
 A special thank you to the oversight and discussion insight from my Code Institute mentor Juliia Konn
+
+## Verification
+
+I verified all code:
+
+* In Lighthouse
+* in the Code Institute CI Python Linter
+* In W3C HTML
+* In W3C CSS
+
+![lighthouse](documentation/lighthouse/lighthouse.png)
+![W3C css](documentation/w3c_html/css.png)
+![W3C HTML add_job](documentation/w3c_html/add_job.png) 
+![W3C HTML edit_dream_job](documentation/w3c_html/edit_dream_job.png) 
+![W3C HTML index](documentation/w3c_html/index.png) 
+![W3C HTML instructions](documentation/w3c_html/instructions.png)
+![admin.py PythonLinther Printcreens](documentation/Python_Linter/admin.png) 
+![apps.py PythonLinther Printcreens](documentation/Python_Linter/apps.png) 
+![forms.py PythonLinther Printcreens](documentation/Python_Linter/forms.png) 
+![models.py PythonLinther Printcreens](documentation/Python_Linter/models.png) 
+![urls.py PythonLinther Printcreens](documentation/Python_Linter/urls.png) 
+![views.py PythonLinther Printcreens](documentation/Python_Linter/views.png)
