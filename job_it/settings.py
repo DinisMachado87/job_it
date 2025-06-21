@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [
     '.herokuapp.com',
     '127.0.0.1',
     'localhost',
-    '8000-dinismachado87-jobit-6ae3ouaxjke.ws-eu108.gitpod.io',
 ]
 
 INSTALLED_APPS = [
